@@ -1,0 +1,170 @@
+h1 {
+    padding-left: 40px;
+	color:white;
+	text-align:left;
+}
+
+html, body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+img{
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-position: center top;
+  background-size: cover;
+  background-opacity=0.5;
+  margin: 0;
+  text-align: center;
+}
+
+featured_events {
+  font-family: 'Lato', sans-serif;
+  background-position: center top;
+  background-size: cover;
+  margin: 0;
+  text-align: left;
+  color:white;
+}
+
+.page-title {
+  text-align: center;
+  font-weight: 100;
+}
+
+nav {
+  background-color:transparent;
+  text-align:left;
+}
+
+nav li {
+  margin: 0;
+  padding: 0 10px;
+  display: inline;
+}
+
+nav ul {
+  display: inline;
+}
+
+nav a {
+  height: 60px;
+  line-height: 60px;
+  color: white;
+  text-decoration: none;
+}
+
+{box-sizing:border-box;}
+ul {list-style-type: none;}
+
+.month {
+    padding: 10px;;
+    width: 28.4%;
+    background: #1abc9c;
+}
+
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.month .prev {
+    float: left;
+    padding-top: 10px;
+}
+
+.month .next {
+    float: right;
+    padding-top: 10px;
+}
+
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 13%;
+    color: #666;
+    float: right;
+	font-size:15px;
+}
+
+.days {
+    padding: 10px 0;
+    background: #eee;
+    margin: 0;
+}
+
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 12%;
+    text-align: right;
+    margin-bottom: 5px;
+    font-size:12px;
+    color: #777;
+}
+
+.days li .active {
+    padding: 5px;
+    background: #1abc9c;
+    color: white !important
+}
+
+
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 13px;
+  width: 13px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}

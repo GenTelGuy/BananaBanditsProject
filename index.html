@@ -1,63 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>MY APP</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="/javascript/SubmitEvent.js"></script>
-</head>
-<body>
-Database POST test page.
-<form action="/quotes" method="POST">
-  <input type="text" placeholder="Event Title" name="Title">
-  <textarea rows="5" cols="80" placeholder="Event Description" name="Description">
-  </textarea>
-  <select id="startYear" name="StartYear">
-    <option value="2017">2017</option>
-    <option value="2018">2018</option>
-    <option value="2019">2019</option>
-  </select>
-  <select id="startMonth" name="StartMonth">
-    <option value="1">January</option>
-    <option value="2">February</option>
-    <option value="3">March</option>
-    <option value="4">April</option>
-    <option value="5">May</option>
-    <option value="6">June</option>
-    <option value="7">July</option>
-    <option value="8">August</option>
-    <option value="9">September</option>
-    <option value="10">October</option>
-    <option value="11">November</option>
-    <option value="12">December</option>
-  </select>
-  <select id="startDay" name="StartDay">
-  </select>
+<html>
+	<head>
+		<title>Banana Bandits</title>
+    	<link rel="stylesheet" type="text/css" href="main.css">
+	</head>
+
+	<nav>
+		<ul>	
+			<li><a href="#"><b>HOME</b></a></li>
+			<li><a href="#">ALL EVENTS</a></li>
+			<li><a href="#">CALENDAR</a></li>
+			<li><a href="#">CATEGORIES</a></li>
+			<li><a href="#">COLLEGE</a></li>
+			<li><a href="#">LIBRARY WALK</a></li>
+			<li><a href="#">SIGN IN/ SIGN UP</a></li>
+		</ul>
+	</nav>
+
+	<body background=bg1.jpg> 	
+		<div class="main">
+			<h1> UCSD Event Tracker </h1>
+		</div>
+	</body>
+
+	<style>
+		input[type=text] {
+	    	width: 130px;
+    		box-sizing: border-box;
+	    	border: 2px solid #ccc;
+		    border-radius: 4px;
+		    font-size: 16px;
+   			background-color: white;
+	    	background-repeat: no-repeat;
+    		padding: 12px 20px 12px 40px;
+    		width: 30%;
+		}
+	</style>
+
+	<form>
+  		<input type="text" name="search" placeholder="Search for an event or organization . . .">
+	</form>
+
+	<br>
+	<br>
 
 
- <select id="endYear" name="EndYear">
-    <option value="2017">2017</option>
-    <option value="2018">2018</option>
-    <option value="2019">2019</option>
-  </select>
-    <select id="endMonth" name="EndMonth">
-    <option value="1">January</option>
-    <option value="2">February</option>
-    <option value="3">March</option>
-    <option value="4">April</option>
-    <option value="5">May</option>
-    <option value="6">June</option>
-    <option value="7">July</option>
-    <option value="8">August</option>
-    <option value="9">September</option>
-    <option value="10">October</option>
-    <option value="11">November</option>
-    <option value="12">December</option>
-  </select>
-  <select id="endDay" name="EndDay">
-  </select>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<body>
 
-  <button id="submit" type="submit">Submit</button>
-</form>
-</body>
-</html>
+		<div class="slideshow-container">
+			
+			<div class="mySlides fade">
+  				<img src="blackscreen.jpg" style="width:80%">
+			</div>
+
+			<div class="mySlides fade">
+				<img src="blackscreen.jpg" style="width:80%">
+			</div>
+
+			<div class="mySlides fade">
+				<img src="blackscreen.jpg" style="width:80%">
+			</div>
+
+			<div class="mySlides fade">
+  				<img src="blackscreen.jpg" style="width:80%">
+			</div>
+
+			<div class="mySlides fade">
+				<img src="blackscreen.jpg" style="width:80%">
+			</div>
+
+			<div class="mySlides fade">
+				<img src="blackscreen.jpg" style="width:80%">
+			</div>
+	
+		</div>
+		<br>
+
+		<div style="text-align:center">
+  			<span class="dot"></span> 
+		    <span class="dot"></span> 
+  			<span class="dot"></span> 
+  			<span class="dot"></span> 
+  			<span class="dot"></span> 
+  			<span class="dot"></span> 
+	 	</div>
+
+		<script>
+			var slideIndex = 0;
+			showSlides();
+
+			function showSlides() {
+		   		var i;
+		    	var slides = document.getElementsByClassName("mySlides");
+		    	var dots = document.getElementsByClassName("dot");
+		    	for (i = 0; i < slides.length; i++) {
+       				slides[i].style.display = "none";  
+ 		  		}
+		  		slideIndex++;
+		   		if (slideIndex> slides.length) {slideIndex = 1}    
+   		   		for (i = 0; i < dots.length; i++) {	
+					dots[i].className = dots[i].className.replace(" active", "");
+    			}
+   		 		slides[slideIndex-1].style.display = "block";  
+    			dots[slideIndex-1].className += " active";
+    			setTimeout(showSlides, 7000); // Change image every 7 seconds
+			}
+		</script>
+
+
+<br>
+<br>
+<br>
+	<div class="month">      
+ 	 	<ul>
+    		<li class="prev">prev</li>
+    		<li class="next">next</li>
+    		<li style="text-align:center">February <br>2017</li>
+ 		</ul>
+	</div>
+
+	<ul class="weekdays" style="width:30%">
+	  	<li>Sa</li>
+  		<li>Fr</li>
+	  	<li>Th</li>
+  		<li>We</li>
+	  	<li>Tu</li>
+  		<li>Mo</li>
+  		<li>Su</li>
+	</ul>
+
+	<ul class="days" style="width:30%">  
+		<li></li>
+		<li></li>
+		<li></li>
+		<li>1</li>
+  		<li>2</li>
+  		<li>3</li>
+  		<li>4</li>
+  		<li>5</li>
+  		<li>6</li>
+  		<li>7</li>
+  		<li>8</li>
+  		<li>9</li>
+  		<li>10</li>
+  		<li>11</li>
+  		<li>12</li>
+  		<li><span class="active">13</span></li>
+  		<li>14</li>
+  		<li>15</li>
+  		<li>16</li>
+  		<li>17</li>
+  		<li>18</li>
+  		<li>19</li>
+  		<li>20</li>
+  		<li>21</li>
+  		<li>22</li>
+  		<li>23</li>
+  		<li>24</li>
+  		<li>25</li>
+  		<li>26</li>
+  		<li>27</li>
+  		<li>28</li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+
