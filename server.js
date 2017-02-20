@@ -1,9 +1,6 @@
-console.log('May Node be with you')
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-//app.set('view engine', 'ejs')
 const MongoClient = require('mongodb').MongoClient;
 
 var path = require('path');
@@ -11,11 +8,8 @@ var path = require('path');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'))
 app.use('/images', express.static(__dirname + 'public'));
-//app.use(express.static(path.join(__dirname, 'public')));
-//app.use('/static', express.static('public'))
 
 var db
-//var view = 'index.ejs'
 
 MongoClient.connect('mongodb://me:123qwe@ds153609.mlab.com:53609/practice-database', (err, database) => {
   if (err) return console.log(err);
@@ -25,47 +19,45 @@ MongoClient.connect('mongodb://me:123qwe@ds153609.mlab.com:53609/practice-databa
   });
 });
 
-/*app.listen(3000, function(){
-  console.log('listening on 3000');
-  })*/
-
-
-
-app.post('/quotes', (req, res) => {
-  console.log(req.body)
-  db.collection('quotes').save(req.body, (err, result) => {
+app.post('/events', (req, res) => {
+  var startTime = req.body.StartYear + "-" + req.body.StartMonth + "-" + req.body.StartDay + "T" + req.body.StartHour + ":" + req.body.StartMinute + ":00-08:00";
+  var endTime = req.body.EndYear + "-" + req.body.EndMonth + "-" + req.body.EndDay + "T" + req.body.EndHour + ":" + req.body.EndMinute + ":00-08:00";
+  console.log(startTime);
+  console.log(endTime);
+  var event = {
+    Title: req.body.Title,
+    Org: "",
+    Pictures: [""],
+    Details: req.body.Description,
+    StartTime: new Date(startTime),
+    EndTime: new Date(endTime),
+    Location: "",
+    Tags: [""],
+    SubmitTime: new Date(),
+    Reports: 0,
+    Approved: false,
+    Expired: false,
+    Featured: false
+  }
+  db.collection('events').save(event, (err, result) => {
     if (err) return console.log(err)
 
     console.log('saved to database')
     res.redirect('/')
   })
-
 })
 
 app.get('/', (req, res) => {
-  /*db.collection('quotes').find().toArray((err, result) => {
-    //if (err) return console.log(err)
-    // renders index.ejs
-    //res.render('index.ejs', {quotes: result})
-    console.log(result);
-  })*/
   res.sendFile(__dirname + '/index.html')
 })
 
 app.get('/data', function (req, res) {
-  //res.send('hello world'); //replace with your data here
-  db.collection('quotes').find().toArray(function (err, results) {
+  db.collection('events').find().toArray(function (err, results) {
     console.log(results);
     res.send(results);
   });
 });
 
 app.get('/events', (req, res) => {
-  /*db.collection('quotes').find().toArray((err, result) => {
-    //if (err) return console.log(err)
-    // renders index.ejs
-    //res.render('index.ejs', {quotes: result})
-    console.log(result);
-  })*/
-    res.sendFile(__dirname + '/BasicEventBrowser.html')
+  res.sendFile(__dirname + '/BasicEventBrowser.html')
 })
