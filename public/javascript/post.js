@@ -60,6 +60,8 @@ function updateEventDivs() {
 
 
 function eventDiv(data) {
+    
+    //console.log(data);
 
     ret = document.createElement("div");
     ret.className = "Event";
@@ -80,6 +82,13 @@ function eventDiv(data) {
     descriptionText = document.createElement("p");
     descriptionText.appendChild(document.createTextNode(data.Details));
     ret.appendChild(descriptionText);
+    
+    detailLink = document.createElement("a");
+    detailLink.href = "http://localhost:3000/eventDetail?query="+data._id;
+    linkText = document.createTextNode("See Event Details");
+    detailLink.appendChild(linkText);
+    //detailLink.title="See Event Details";
+    ret.appendChild(detailLink);
 
     return (ret);
 }
