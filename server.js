@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID
 
 var path = require('path');
 
@@ -60,4 +61,20 @@ app.get('/data', function (req, res) {
 
 app.get('/events', (req, res) => {
   res.sendFile(__dirname + '/BasicEventBrowser.html')
-})
+});
+
+app.get('/eventDetail', (req, res) => {
+  res.sendFile(__dirname + '/EventDetail.html')
+});
+
+app.get('/eventDetailQuery', function (req, res) {
+  //const body = req.body.Body
+  console.log(req.query);
+  var newObjectId = new ObjectID.createFromHexString(req.query['$oid']);
+  //res.set('Content-Type', 'text/plain')
+  db.collection('events').find(newObjectId).toArray(function (err, results) {
+  console.log(results);
+  res.send(results);
+});
+});
+
