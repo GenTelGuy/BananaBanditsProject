@@ -17,7 +17,7 @@ app.use('/images', express.static(__dirname + 'public'));
 var db
 //var view = 'index.ejs'
 
-MongoClient.connect('mongodb://cse110:banana@ds137139.mlab.com:37139/cse110', (err, database) => {
+MongoClient.connect('mongodb://zehualiu:1234567890@ds155509.mlab.com:55509/banana', (err, database) => {
         if(err) return console.log(err);
         db = database;
         app.listen(3000, () => {
