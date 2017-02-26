@@ -4,24 +4,7 @@
 	  <meta charset="UTF-8">
 	  <title>Login Page</title>
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	  <script> 
-	  $(document).ready(function () {
-	  	$('#updateEvents').click(function () {
-			if($('#email').val().includes("@")){
-			$('#eventList').append("Verifying\n");
-			$.post("http://localhost:3000/loginInfo",{email:$('#email').val(),pass:$('#password').val()},function(data){
-				window.alert("Session stored");
-				window.name = $('#email').val();
-				if(data==='done'){ window.location.href="http://localhost:3000/admitted";}
-			});
-			//window.alert("Valid email");
-			//window.location.href = "http://localhost:3000/events";
-		}else{
-			window.alert("Please enter a valid email");
-		}
-		});
-	  });
-	  </script>
+	  <script src="/javascript/login.js"></script>
 
   
     

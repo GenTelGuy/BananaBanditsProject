@@ -113,3 +113,7 @@ app.get('/account',function(req,res){
 	}
 
 });
+
+app.get('/createAccount',function(req,res){
+	res.sendFile(__dirname+'/createAccount.html');
+});
