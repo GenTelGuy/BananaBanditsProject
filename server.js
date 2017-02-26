@@ -134,3 +134,15 @@ app.get('/account',function(req,res){
 app.get('/createAccount',function(req,res){
 	res.sendFile(__dirname+'/createAccount.html');
 });
+
+/* basic admin page, without database info looks like account page */
+app.get('/adminAccount',function(req,res){
+	sess=req.session;
+	if(sess.email){
+		res.sendFile(__dirname+'/adminAccount.html');
+	}
+	else{
+		res.write('<h1>Please login first. </h1>');
+		res.end('<a href='+'/login'+'>Login</a>');
+	}
+});
