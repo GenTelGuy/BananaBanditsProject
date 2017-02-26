@@ -11,6 +11,7 @@
 			$('#eventList').append("Verifying\n");
 			$.post("http://localhost:3000/loginInfo",{email:$('#email').val(),pass:$('#password').val()},function(data){
 				window.alert("Session stored");
+				window.name = $('#email').val();
 				if(data==='done'){ window.location.href="http://localhost:3000/admitted";}
 			});
 			//window.alert("Valid email");

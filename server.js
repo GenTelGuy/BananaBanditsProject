@@ -87,16 +87,29 @@ app.get('/login',function(req,res){
 app.post('/loginInfo',function(req,res){
 	sess=req.session;
 	sess.email=req.body.email;
+	//localStorage.setItem("email",sess.email);
 	res.end('done');
 });
 app.get('/admitted',function(req,res){
 	sess=req.session;
 	if(sess.email){
 		res.write('<h1>Hello '+sess.email+'</h1><br>');
+		res.write('<a href='+'/account'+'>My Account</a></br>');
 		res.end('<a href='+'/events'+'>Logout</a>');
 	}
 	else{
 		res.write('<h1>Please login first.</h1>');
 		res.end('<a href='+'/login'+'>Login</a>');
 	}
+});
+app.get('/account',function(req,res){
+	sess=req.session;
+	if(sess.email){
+		res.sendFile(__dirname+'/account.html');
+	}
+	else{
+		res.write('<h1>Please login first.</h1>');
+		res.end('<a href='+'/login'+'>Login</a>');
+	}
+
 });

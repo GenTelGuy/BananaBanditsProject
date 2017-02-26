@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Account page</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="/javascript/account.js"></script>
+</head>
+<body>
+
+    <h1><script>document.write(window.name);</script></h1> 
+    <script>window.onload = updateEventsList();</script>
+    <script>window.onload = filterEvents();</script>
+    <script>window.onload = updateDivs();</script>
+
+    <div id="eventList">
+    </div>
+<button id="updateEvents" type="button">Button</button>
+</body>
+</html>
