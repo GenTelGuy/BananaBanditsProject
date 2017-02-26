@@ -5,12 +5,10 @@ $(document).ready(function () {
 });
 function verify(){
 	if($('#email').val().includes("@")){
-		$('#eventList').append("Verifying\n");
-		/*$.post("http://localhost:3000/loginInfo",{email:$('#email').val,pass:$('#password')},function(data){
-			window.alert("Session stored");
-			if(data==='done'){ window.location.href = "/admitted";}
-			});*/
-		window.loacation=href"/admitted";
+		$.post("http://localhost:3000/loginInfo",{email:$('#email').val(),pass:$('#password').val()},function(data){
+			window.name = $('#email').val();
+			if(data==='done'){ window.location.href="http://localhost:3000/admitted";}
+		});
 	}else{
 		window.alert("Please enter a valid email");
 	}
