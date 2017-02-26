@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');    //added
 const bodyParser = require('body-parser');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
@@ -9,8 +10,10 @@ var path = require('path');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'))
 app.use('/images', express.static(__dirname + 'public'));
+app.use(session({secret: 'ssshhhhh', saveUninitialized: true, resave: true}));        //added
 
 var db
+var sess;
 
 MongoClient.connect('mongodb://cse110:banana@ds137139.mlab.com:37139/cse110', (err, database) => {
   if (err) return console.log(err);
@@ -77,4 +80,23 @@ app.get('/eventDetailQuery', function (req, res) {
   res.send(results);
 });
 });
+app.get('/login',function(req,res){
+  res.sendFile(__dirname+'/login.html');
 
+});
+app.post('/loginInfo',function(req,res){
+	sess=req.session;
+	sess.email=req.body.email;
+	res.end('done');
+});
+app.get('/admitted',function(req,res){
+	sess=req.session;
+	if(sess.email){
+		res.write('<h1>Hello '+sess.email+'</h1><br>');
+		res.end('<a href='+'/events'+'>Logout</a>');
+	}
+	else{
+		res.write('<h1>Please login first.</h1>');
+		res.end('<a href='+'/login'+'>Login</a>');
+	}
+});
