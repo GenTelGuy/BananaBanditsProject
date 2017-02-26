@@ -1,16 +1,15 @@
 $(document).ready(function () {
+    /* if button pushed pull all events, not truly needed but was used
+        initially to check if page working
+    */
     $('#updateEvents').click(function () {
         updateEventsList();
     });
-    /*$('#searchBar').keyup(function () {
-        filterEvents();
-        updateEventDivs();
-    });*/
-
     var allEvents = [];
 
 });
 
+/* pull events from data and write to page */
 function updateEventsList() {
     response = $.get('http://localhost:3000/data', {}, function (data) {
         $('#eventList').empty();
@@ -29,8 +28,9 @@ function updateEventsList() {
     });
 }
 
+/* filter events specifically for user, dont user search bar */
 function filterEvents(string) {
-    searchString = string//$('#searchBar').val();
+    searchString = string
     for (i = 0; i < allEvents.length; i++) {
         evt = allEvents[i];
         match = false;

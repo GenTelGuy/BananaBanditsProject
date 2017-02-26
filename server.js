@@ -80,29 +80,45 @@ app.get('/eventDetailQuery', function (req, res) {
   res.send(results);
 });
 });
+
+/* when login is requested load login form */
 app.get('/login',function(req,res){
   res.sendFile(__dirname+'/login.html');
 
 });
+
+/* when requested write the session info */
 app.post('/loginInfo',function(req,res){
 	sess=req.session;
 	sess.email=req.body.email;
-	//localStorage.setItem("email",sess.email);
-	res.end('done');
+	res.end('done');    //send out done so files know its done writing.
 });
+
+/* temp page used to show successful login */
 app.get('/admitted',function(req,res){
+	/* store login info, if theres an email then
+	   print hello user.email and provide myAccount
+	   and login buttons 
+	*/
 	sess=req.session;
 	if(sess.email){
 		res.write('<h1>Hello '+sess.email+'</h1><br>');
 		res.write('<a href='+'/account'+'>My Account</a></br>');
 		res.end('<a href='+'/events'+'>Logout</a>');
 	}
+	/* if no email redirect to /login */
 	else{
 		res.write('<h1>Please login first.</h1>');
 		res.end('<a href='+'/login'+'>Login</a>');
 	}
 });
+
+/* basic account page */
 app.get('/account',function(req,res){
+	/* get session info, if not logged in
+	   direct to log in, otherwise send to 
+	   account page
+	*/
 	sess=req.session;
 	if(sess.email){
 		res.sendFile(__dirname+'/account.html');
@@ -114,6 +130,7 @@ app.get('/account',function(req,res){
 
 });
 
+/* basic create account form */
 app.get('/createAccount',function(req,res){
 	res.sendFile(__dirname+'/createAccount.html');
 });

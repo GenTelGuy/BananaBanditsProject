@@ -3,18 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Account page</title>
+  <!-- set up sources -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="/javascript/account.js"></script>
 </head>
 <body>
 
+    <!-- write user email to screen, display events
+    	 then look for the user id   -->
     <h1><script>document.write(window.name);</script></h1> 
     <script>window.onload = updateEventsList();</script>
     <script>window.onload = filterEvents();</script>
     <script>window.onload = updateDivs();</script>
 
+    <!-- where to display the events -->
     <div id="eventList">
     </div>
+
+    <!-- button to refersh events searched -->
 <button id="updateEvents" type="button">Button</button>
 </body>
 </html>
+
+
+<!-- needed update: pull actual user id from database and search actual user id -->
