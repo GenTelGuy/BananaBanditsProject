@@ -12,7 +12,7 @@
     <title>UCSD Eventss</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Theme CSS -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
@@ -86,11 +86,75 @@
             </div>
         </div>
     </header>
+ 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<body>
 
+		<div class="slideshow-container">
+			
+			<div class="mySlides">
+  				<img src="blackscreen.jpg" style="width:50%">
+			</div>
+
+			<div class="mySlides">
+				<img src="blackscreen.jpg" style="width:50%">
+			</div>
+
+			<div class="mySlides">
+				<img src="blackscreen.jpg" style="width:50%">
+			</div>
+
+			<div class="mySlides">
+  				<img src="blackscreen.jpg" style="width:50%">
+			</div>
+
+			<div class="mySlides">
+				<img src="blackscreen.jpg" style="width:50%">
+			</div>
+
+			<div class="mySlides">
+				<img src="blackscreen.jpg" style="width:50%">
+			</div>
+	
+		</div>
+		<br>
+
+		<div style="text-align:center">
+  			<span class="dot"></span> 
+		    <span class="dot"></span> 
+  			<span class="dot"></span> 
+  			<span class="dot"></span> 
+  			<span class="dot"></span> 
+  			<span class="dot"></span> 
+	 	</div>
+
+        <script>
+            var slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";  
+                }
+                slideIndex++;
+                if (slideIndex> slides.length) {slideIndex = 1}    
+                for (i = 0; i < dots.length; i++) { 
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex-1].style.display = "block";  
+                dots[slideIndex-1].className += " active";
+                setTimeout(showSlides, 7000); // Change image every 7 seconds
+            }
+        </script>
+
+</body>
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-5 col-lg-offset-1">
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
@@ -106,44 +170,66 @@
                     </a>
                     <p class="post-meta">Posted by <a href="#">Organization</a> Date</p>
                 </div>
-                <hr>
+             	<hr>
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
-                            I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
-                        </h2>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 18, 2014</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                            Science has not yet mastered prophecy
-                        </h2>
+                        	EVENT 2
+						</h2>
                         <h3 class="post-subtitle">
-                            We predict too much for the next year and yet far too little for the next ten.
-                        </h3>
+                        	Details <br>
+							Date <br>
+							Location <br>
+							Time <br>
+							Link to Social Media <br>
+						</h3>
                     </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on August 24, 2014</p>
-                </div>
+                    <p class="post-meta">Posted by <a href="#">Organization</a> Date</p></div>
+                <hr>
+
+			</div>
+
+
+                <div class="post-preview">
+                    <a href="post.html">
+                        <h2 class="post-title">
+                        	EVENT 3
+						</h2>
+                        <h3 class="post-subtitle">
+                        	Details <br>
+							Date <br>
+							Location <br>
+							Time <br>
+							Link to Social Media <br>
+						</h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#">Organization</a> Date</p></div>
                 <hr>
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
-                            Failure is not an option
-                        </h2>
+                        	EVENT 4
+						</h2>
                         <h3 class="post-subtitle">
-                            Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-                        </h3>
+                        	Details <br>
+							Date <br>
+							Location <br>
+							Time <br>
+							Link to Social Media <br>
+						</h3>
                     </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on July 8, 2014</p>
-                </div>
+                    <p class="post-meta">Posted by <a href="#">Organization</a> Date</p></div>
+
                 <hr>
-                <!-- Pager -->
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<body>
+
+	                       
+            <!-- Pager -->
                 <ul class="pager">
                     <li class="next">
-                        <a href="#">Older Posts &rarr;</a>
+                        <a href="#">See All Events</a>
                     </li>
                 </ul>
             </div>
