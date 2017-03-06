@@ -43,13 +43,13 @@ app.post('/events', (req, res) => {
   db.collection('events').save(event, (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
-    res.redirect('/')
+    res.redirect('/submitEvent.html')
   })
 })
 
 // direct user to basic events list
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
+app.get('/submitEvent', (req, res) => {
+  res.sendFile(__dirname + '/submitEvent.html')
 })
 
 // fetch data on the events in the database
