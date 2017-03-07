@@ -1,0 +1,12 @@
+<!doctype html>
+<h1>List of Accounts</h1>
+	{{#each listOf}}
+		<p>{{{json this}}}</p>
+	{{/each}}
+<form action="/">
+	<button type="submit">Go To Home Page</button>
+</form><br>
+
+<form action="/deleteAll">
+	<button type="submit">Delete DataBase</button>
+</form>
