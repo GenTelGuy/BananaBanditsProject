@@ -6,9 +6,17 @@ var userData = db.get('accounts');
 var eventData = db.get('events');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/logIn', function (req, res, next) {
 	res.render('index', { title: 'Express' });
+});
+
+router.get('/calendar', function (req, res, next) {
+	res.render('calendar', { title: 'Express' });
 })
+
+router.get('/', function (req, res, next) {
+	res.render('homePage', { title: 'Express' });
+});
 
 router.get('/login/:email', function (req, res, next) {
 	var retEmail = req.params.email;
@@ -115,7 +123,7 @@ router.get('/allEventData', function (req, res, next) {
 });
 
 router.get('/eventDetail', function (req, res, next) {
-	res.render('EventDetail')
+	res.render('EventDetail_front')
 });
 
 router.get('/eventDetailQuery', function (req, res, next) {

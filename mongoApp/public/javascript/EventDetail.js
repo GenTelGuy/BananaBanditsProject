@@ -9,6 +9,9 @@ function getQueryVariable(variable) {
     return (false);
 }
 
+
+//TODO refactor div to p in function names etc
+
 // similar to updateEventsList in post.js, but queries for an event by objectID
 function updateEventsList() {
     // direct to eventDetailQuery with the objectID
@@ -17,13 +20,17 @@ function updateEventsList() {
         allEvents = [];
         for (i = 0; i < data.length; i++) {
             createdDiv = eventDiv(data[i]);
+        
             a = {
                 visible: true,
                 searchableText: [data[i].Title.toLowerCase(),
                 data[i].Details.toLowerCase()],
             }
             allEvents.push(a);
-            $('#eventList').append(createdDiv);
+            $('#eventDiv').append(createdDiv);
+            
+            
+            $('#title').text(data[i].Title);
         }
     });
 }
@@ -31,8 +38,8 @@ function updateEventsList() {
 // make the div for this event, same as in post.js
 function eventDiv(data) {
 
-    ret = document.createElement("div");
-    ret.className = "Event";
+    ret = document.createElement("p");
+    ret.className = "desc-text";
 
     header = document.createElement("h3");
     header.appendChild(document.createTextNode(data.Title));
