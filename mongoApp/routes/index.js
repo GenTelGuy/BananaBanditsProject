@@ -92,7 +92,7 @@ router.post('/createEvent', function (req, res, next) {
 	// creates a properly formatted event object from the info the user filled out
 	var event = {
 		Title: req.body.Title,
-		Org: "",
+		Org: new ObjectId(),
 		Pictures: [""],
 		Details: req.body.Description,
 		StartTime: new Date(startTime),
