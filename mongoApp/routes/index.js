@@ -4,9 +4,20 @@ var db = require('monk')('mongodb://cse110:banana@ds137139.mlab.com:37139/cse110
 const monk = require('monk');
 var userData = db.get('accounts');
 var eventData = db.get('events');
+var userFound = false;
+//var session = require('express-session');
+//var userSessionName;
+//var userSessionPassword;
 
+/**var auth = function(req, res, next) {
+	if(req.session && userFound)
+		return next();
+	else
+		return res.sendStatus(401);
+};*/
 /* GET home page. */
 router.get('/', function (req, res, next) {
+	console.log(req.session);
 	res.render('index', { title: 'Express' });
 })
 
@@ -17,6 +28,7 @@ router.get('/login/:email', function (req, res, next) {
 });
 
 router.get('/createAccount', function (req, res, next) {
+	console.log(req.session);
 	res.render('createAccount');
 });
 
@@ -38,16 +50,47 @@ router.post('/login/submit', function (req, res, next) {
 	var orgEmail = req.body.email;
 	var orgPassword = req.body.password;
 
-	var data = userData.findOne({ $and: [{ "Email": orgEmail }, { "Password": orgPassword }] });
-	data.then(function (data) {
+	userData.findOne({ $and: [{ "Email": orgEmail }, { "Password": orgPassword }] }, function(err, user) {
+		if(!user) {
+			res.redirect('/notExist');
+		}
+		else {
+			req.session.user = user;
+			res.redirect('/login/' + orgEmail);
+		}
+	});
+	//var data = userData.findOne({ $and: [{ "Email": orgEmail }, { "Password": orgPassword }] });
+	/**data.then(function (data) {
 		console.log(data);
 		if (data == null) {
 			res.redirect('/notExist');
 		}
 		else {
+			//userSessionName = orgEmail;
+			//userSessionPassword = orgPassword;
+			userFound = true;
 			res.redirect('/login/' + orgEmail);
 		}
-	});
+	});*/
+});
+
+router.post('/dashbaord', function(req, res, next){
+	console.log(req.session);
+	//res.render('listAccounts.hbs');
+	if(!req.session.user) {
+		res.redirect('/listAccounts');
+
+		//return res.status(401);
+	}
+	else {
+		res.redirect('/createAccount');
+		//return res.status(200).send('Welcom to Secret key');
+	}
+});
+
+router.get('/logout', function(req, res){
+	req.session.destroy();
+	res.render('index');
 });
 
 router.get('/notExist', function (req, res, next) {
@@ -66,16 +109,31 @@ router.get('/listAccounts', function (req, res, next) {
 			}
 		});
 	});
+	//req.session.reset();
 });
 
-router.get('/deleteAll', function (req, res, next) {
+function requireLogin (req, res, next) {
+  if (!req.user) {
+    res.redirect('/');
+  } else {
+    next();
+  }
+};
+
+router.get('/deleteAll', requireLogin, function (req, res) {
 	userData.remove({}).then(function (data) {
 		res.redirect('/listAccounts');
 	});
 });
 
 router.get('/submitEvent', function (req, res, next) {
-	res.render('submitEvent');
+	console.log(req.session);
+	if(!req.session.user){
+		res.render('notExist');
+	}
+	else {
+		res.render('submitEvent');
+	}
 });
 
 router.post('/createEvent', function (req, res, next) {
@@ -97,6 +155,8 @@ router.post('/createEvent', function (req, res, next) {
 		Expired: false,
 		Featured: false
 	}
+	var test = req.session.Email;
+	console.log(req.session.user.Email);
 	// add the event to the database
 	eventData.insert(event);
 	console.log('saved event to database');
