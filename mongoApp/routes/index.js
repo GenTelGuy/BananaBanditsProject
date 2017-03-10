@@ -4,16 +4,24 @@ var db = require('monk')('mongodb://cse110:banana@ds137139.mlab.com:37139/cse110
 const monk = require('monk');
 var userData = db.get('accounts');
 var eventData = db.get('events');
+var userFound = false;
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/login', function (req, res, next) {
 	res.render('index', { title: 'Express' });
+});
+
+router.get('/calendar', function (req, res, next) {
+	res.render('calendar', { title: 'Express' });
 })
+
+router.get('/', function (req, res, next) {
+	res.render('homePage', { title: 'Express' });
+});
 
 router.get('/login/:email', function (req, res, next) {
 	var retEmail = req.params.email;
 	res.render('loggedin', { email: retEmail });
-	console.log('retEmail');
 });
 
 router.get('/createAccount', function (req, res, next) {
@@ -38,16 +46,20 @@ router.post('/login/submit', function (req, res, next) {
 	var orgEmail = req.body.email;
 	var orgPassword = req.body.password;
 
-	var data = userData.findOne({ $and: [{ "Email": orgEmail }, { "Password": orgPassword }] });
-	data.then(function (data) {
-		console.log(data);
-		if (data == null) {
+	userData.findOne({ $and: [{ "Email": orgEmail }, { "Password": orgPassword }] }, function (err, user) {
+		if (!user) {
 			res.redirect('/notExist');
 		}
 		else {
+			req.session.user = user;
 			res.redirect('/login/' + orgEmail);
 		}
 	});
+});
+
+router.get('/logout', function (req, res) {
+	req.session.destroy();
+	res.render('index');
 });
 
 router.get('/notExist', function (req, res, next) {
@@ -68,11 +80,19 @@ router.get('/listAccounts', function (req, res, next) {
 	});
 });
 
-router.get('/deleteAll', function (req, res, next) {
+function requireLogin(req, res, next) {
+	if (!req.user) {
+		res.redirect('/');
+	} else {
+		next();
+	}
+}
+
+router.get('/deleteAll', requireLogin, function (req, res) {
 	userData.remove({}).then(function (data) {
 		res.redirect('/listAccounts');
 	});
-});
+})
 
 router.get('/submitEvent', function (req, res, next) {
 	res.render('submitEvent');
@@ -82,9 +102,10 @@ router.post('/createEvent', function (req, res, next) {
 	var startTime = req.body.StartYear + "-" + req.body.StartMonth + "-" + req.body.StartDay + "T" + req.body.StartHour + ":" + req.body.StartMinute + ":00-08:00Z";
 	var endTime = req.body.EndYear + "-" + req.body.EndMonth + "-" + req.body.EndDay + "T" + req.body.EndHour + ":" + req.body.EndMinute + ":00-08:00Z";
 	// creates a properly formatted event object from the info the user filled out
+	const OrgId = monk.id(req.session.user._id);
 	var event = {
 		Title: req.body.Title,
-		Org: "",
+		Org: OrgId,
 		Pictures: [""],
 		Details: req.body.Description,
 		StartTime: new Date(startTime),
@@ -98,6 +119,7 @@ router.post('/createEvent', function (req, res, next) {
 		Featured: false
 	}
 	// add the event to the database
+	console.log(req.session.user)
 	eventData.insert(event);
 	console.log('saved event to database');
 	res.redirect('/submitEvent')
@@ -115,7 +137,7 @@ router.get('/allEventData', function (req, res, next) {
 });
 
 router.get('/eventDetail', function (req, res, next) {
-	res.render('EventDetail')
+	res.render('EventDetail_front')
 });
 
 router.get('/eventDetailQuery', function (req, res, next) {
