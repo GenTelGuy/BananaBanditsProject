@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require('monk')('mongodb://cse110:banana@ds137139.mlab.com:37139/cse110');
+var db = require('monk')('mongodb://me:123qwe@ds153609.mlab.com:53609/practice-database');
 const monk = require('monk');
 var userData = db.get('accounts');
 var eventData = db.get('events');
@@ -8,7 +8,7 @@ var userFound = false;
 
 /* GET home page. */
 router.get('/login', function (req, res, next) {
-	res.render('index', { title: 'Express' });
+	res.render('login', { title: 'Express' });
 });
 
 router.get('/calendar', function (req, res, next) {
@@ -59,7 +59,7 @@ router.post('/login/submit', function (req, res, next) {
 
 router.get('/logout', function (req, res) {
 	req.session.destroy();
-	res.render('index');
+	res.render('homePage');
 });
 
 router.get('/notExist', function (req, res, next) {
@@ -80,27 +80,22 @@ router.get('/listAccounts', function (req, res, next) {
 	});
 });
 
-function requireLogin(req, res, next) {
-	if (!req.user) {
-		res.redirect('/');
-	} else {
-		next();
-	}
-}
-
-router.get('/deleteAll', requireLogin, function (req, res) {
-	userData.remove({}).then(function (data) {
-		res.redirect('/listAccounts');
-	});
-})
-
+// should require login
 router.get('/submitEvent', function (req, res, next) {
-	res.render('submitEvent');
+	if (req.session.user) {
+		res.render('submitEvent');
+	}
+  else {
+		res.render('requireLogin');
+	}
 });
 
 router.post('/createEvent', function (req, res, next) {
-	var startTime = req.body.StartYear + "-" + req.body.StartMonth + "-" + req.body.StartDay + "T" + req.body.StartHour + ":" + req.body.StartMinute + ":00-08:00Z";
-	var endTime = req.body.EndYear + "-" + req.body.EndMonth + "-" + req.body.EndDay + "T" + req.body.EndHour + ":" + req.body.EndMinute + ":00-08:00Z";
+	console.log(req.body);
+	var startTime = req.body.StartYear + "-" + req.body.StartMonth + "-" + req.body.StartDay + "T" + req.body.StartHour + ":" + req.body.StartMinute + ":00-08:00";
+	var endTime = req.body.EndYear + "-" + req.body.EndMonth + "-" + req.body.EndDay + "T" + req.body.EndHour + ":" + req.body.EndMinute + ":00-08:00";
+	console.log(startTime);
+	console.log(endTime);
 	// creates a properly formatted event object from the info the user filled out
 	const OrgId = monk.id(req.session.user._id);
 	var event = {
@@ -110,8 +105,10 @@ router.post('/createEvent', function (req, res, next) {
 		Details: req.body.Description,
 		StartTime: new Date(startTime),
 		EndTime: new Date(endTime),
-		Location: "",
+		Location: req.body.Location,
 		Tags: [""],
+		Email: req.body.Email,
+		Phone: req.body.Phone,
 		SubmitTime: new Date(),
 		Reports: 0,
 		Approved: false,
