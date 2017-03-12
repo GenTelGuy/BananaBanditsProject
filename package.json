@@ -1,0 +1,31 @@
+{
+  "name": "bbproject",
+  "version": "1.0.0",
+  "description": "Test CRUD app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "ejs": "^2.5.5",
+    "express": "^4.14.1",
+    "express-session": "^1.15.1",
+    "mongodb": "^2.2.22"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/generaltempleton/BananaBanditsProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/generaltempleton/BananaBanditsProject/issues"
+  },
+  "homepage": "https://github.com/generaltempleton/BananaBanditsProject#readme"
+}

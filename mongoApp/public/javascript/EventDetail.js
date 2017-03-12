@@ -65,7 +65,63 @@ function eventDiv(data) {
     descriptionText.appendChild(document.createTextNode(data.Details));
     ret.appendChild(descriptionText);
 
-    return (ret);
+    form = document.createElement("form");
+            form.setAttribute('action', "/deleteEvent");
+            form.setAttribute('method', "post");
+            form.appendChild(ret);
+
+    input = document.createElement("input");
+            input.setAttribute('type', "hidden");
+            input.setAttribute('name', "eventname")
+            input.setAttribute('value', data.Title);
+
+    pin = document.createElement("input");
+        pin.setAttribute('type', "hidden");
+        pin.setAttribute('name', "eventpin");
+        pin.setAttribute('value', data.Title);
+        pin.setAttribute('formaction', "/pinEvent");
+
+    edit = document.createElement("input");
+        edit.setAttribute('type', "hidden");
+        edit.setAttribute('name', "editevent");
+        edit.setAttribute('value', data._id);
+        pin.setAttribute('formaction', "/edit");
+
+    $.get("http://localhost:3000/checkAdmin", {}, function(data) {
+        if(data == "admin") {
+            /**
+            form = document.createElement("form");
+            form.setAttribute('action', "/deleteEvent");
+            form.setAttribute('method', "post");
+            form.appendChild(ret);*/
+
+
+            button = document.createElement("button");
+            button.setAttribute('type', "submit");
+            button.innerHTML = 'Delete';
+
+            button2 = document.createElement("button");
+            button2.setAttribute('type', "submit");
+            button2.setAttribute('formaction', "/pinEvent");
+            button2.innerHTML = 'Feature Event';
+
+            button3 = document.createElement("button");
+            button3.setAttribute('type', "submit");
+            button3.setAttribute('formaction', "/edit");
+            button3.innerHTML = 'Edit Event';
+
+            form.appendChild(input);
+            form.appendChild(button);
+
+            form.appendChild(pin);
+            form.appendChild(button2);
+
+            form.appendChild(edit);
+            form.appendChild(button3);
+
+        }
+    });
+    return form;
 }
 
 // makes the date appear in a readable format

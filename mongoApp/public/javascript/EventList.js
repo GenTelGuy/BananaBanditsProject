@@ -103,6 +103,24 @@ function eventDiv(data) {
     detailLink.appendChild(linkText);
     ret.appendChild(detailLink);
 
+    var form = document.createElement("form");
+    form.setAttribute('method', "post");
+    form.setAttribute('action', "/deleteEvent");
+
+    var input = document.createElement("input");
+    input.setAttribute('type', "text");
+    input.setAttribute('eventname', data.Title);
+    input.setAttribute('value', data.Title);
+    //console.log(data.Title);
+
+    var button = document.createElement("button");
+    button.setAttribute('type', "submit");
+    button.innerHTML = 'Delete';
+
+    /**form.appendChild(input);
+    form.appendChild(button);
+    ret.appendChild(form);*/
+
     return (ret);
 }
 
