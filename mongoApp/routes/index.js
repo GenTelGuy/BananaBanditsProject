@@ -16,10 +16,17 @@ var userFound = false;
 		return res.sendStatus(401);
 };*/
 /* GET home page. */
-router.get('/', function (req, res, next) {
-	console.log(req.session);
-	res.render('index', { title: 'Express' });
+router.get('/login', function (req, res, next) {
+	res.render('login', { title: 'Express' });
+});
+
+router.get('/calendar', function (req, res, next) {
+	res.render('calendar', { title: 'Express' });
 })
+
+router.get('/', function (req, res, next) {
+	res.render('homePage', { title: 'Express' });
+});
 
 router.get('/login/:email', function (req, res, next) {
 	var retEmail = req.params.email;
@@ -135,7 +142,7 @@ router.post('/forgetPassword/submit', function(req, res){
 });
 router.get('/logout', function(req, res){
 	req.session.destroy();
-	res.render('index');
+	res.render('homePage');
 });
 
 router.get('/notExist', function (req, res, next) {
@@ -267,29 +274,36 @@ router.post('/updateEvent', function(req, res) {
 	});
 });
 
+// should require login
 router.get('/submitEvent', function (req, res, next) {
 	console.log(req.session);
 	if(!req.session.user){
 		res.render('notExist');
 	}
 	else {
-		res.render('submitEvent');
+		res.render('requireLogin');
 	}
 });
 
 router.post('/createEvent', function (req, res, next) {
-	var startTime = req.body.StartYear + "-" + req.body.StartMonth + "-" + req.body.StartDay + "T" + req.body.StartHour + ":" + req.body.StartMinute + ":00-08:00Z";
-	var endTime = req.body.EndYear + "-" + req.body.EndMonth + "-" + req.body.EndDay + "T" + req.body.EndHour + ":" + req.body.EndMinute + ":00-08:00Z";
+	console.log(req.body);
+	var startTime = req.body.StartYear + "-" + req.body.StartMonth + "-" + req.body.StartDay + "T" + req.body.StartHour + ":" + req.body.StartMinute + ":00-08:00";
+	var endTime = req.body.EndYear + "-" + req.body.EndMonth + "-" + req.body.EndDay + "T" + req.body.EndHour + ":" + req.body.EndMinute + ":00-08:00";
+	console.log(startTime);
+	console.log(endTime);
 	// creates a properly formatted event object from the info the user filled out
+	const OrgId = monk.id(req.session.user._id);
 	var event = {
 		Title: req.body.Title,
-		Org: "",
+		Org: OrgId,
 		Pictures: [""],
 		Details: req.body.Description,
 		StartTime: new Date(startTime),
 		EndTime: new Date(endTime),
-		Location: "",
+		Location: req.body.Location,
 		Tags: [""],
+		Email: req.body.Email,
+		Phone: req.body.Phone,
 		SubmitTime: new Date(),
 		Reports: 0,
 		Approved: false,
@@ -299,6 +313,7 @@ router.post('/createEvent', function (req, res, next) {
 	var test = req.session.Email;
 	console.log(req.session.user.Email);
 	// add the event to the database
+	console.log(req.session.user)
 	eventData.insert(event);
 	console.log('saved event to database');
 	res.redirect('/submitEvent')
@@ -316,8 +331,7 @@ router.get('/allEventData', function (req, res, next) {
 });
 
 router.get('/eventDetail', function (req, res, next) {
-	res.render('EventDetail')
-
+	res.render('EventDetail_front')
 });
 
 router.get('/eventDetailQuery', function (req, res, next) {
