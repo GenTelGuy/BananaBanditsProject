@@ -1,3 +1,4 @@
+/*Hiro's clean blog*/
 /*!
  * Start Bootstrap - Clean Blog v3.3.7+1 (http://startbootstrap.com/template-overviews/clean-blog)
  * Copyright 2013-2016 Start Bootstrap
@@ -34,7 +35,8 @@ a {
 }
 a:hover,
 a:focus {
-  color: #0085A1;
+  /*color: #0085A1;*/
+  color: grey;
 }
 a img:hover,
 a img:focus {
@@ -86,7 +88,7 @@ hr.small {
   }
   .navbar-custom .navbar-brand:hover,
   .navbar-custom .navbar-brand:focus {
-    color: rgba(255, 255, 255, 0.8);
+    color: #0085A1;
   }
     
   /*top right nav bar*/
@@ -96,7 +98,7 @@ hr.small {
   }
   .navbar-custom .nav li a:hover,
   .navbar-custom .nav li a:focus {
-    color: rgba(255, 255, 255, 0.8);
+    color:#0085A1 ;
   }
 }
 @media only screen and (min-width: 1170px) {
@@ -538,4 +540,48 @@ body {
 
 .crucial-info{
     display:block;
+}
+
+.signup-form{
+    text-align: center;
+}
+
+.org-pic{
+  display: inline-block;
+  background-color: #777777;
+  background: no-repeat center center;
+  background-attachment: scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: 300px 300px;
+  -o-background-size: cover;
+  margin: 30px;
+  width: 300px;
+  height: 300px;
+}
+.orgcontainer{
+    display:flex;
+    height:auto;
+
+}
+.org_desc{
+    display:inline-block;
+    margin: 30px;
+    width: 300px;
+    height: auto;
+    border: double;
+    word-break: break-all;
+    white-space: normal;
+}
+.org_details_list{
+    display:inline-block;
+    margin: 30px;
+    width: 300px;
+    height: auto;
+    border: double;
+
+}
+
+.submitbutton{
+    margin-left:30px;
 }
