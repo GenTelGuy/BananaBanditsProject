@@ -17,7 +17,7 @@ var userFound = false;
 };*/
 /* GET home page. */
 router.get('/login', function (req, res, next) {
-	res.render('login', { title: 'Express' });
+	res.render('index', { title: 'Express' });
 });
 
 router.get('/calendar', function (req, res, next) {
@@ -277,12 +277,12 @@ router.post('/updateEvent', function(req, res) {
 // should require login
 router.get('/submitEvent', function (req, res, next) {
 	console.log(req.session);
-	if(!req.session.user){
-		res.render('notExist');
-	}
-	else {
-		res.render('requireLogin');
-	}
+	if(req.session.user){
+        res.render('submitEvent');
+    }
+    else{
+        res.render('requireLogin');
+    }
 });
 
 router.post('/createEvent', function (req, res, next) {
