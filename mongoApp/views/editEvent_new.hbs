@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Event Snap - Edit Event</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="/css/clean-blog.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/javascript/SubmitEvent.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="index.html">Events Snap</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/eventBrowser">All Events</a>
+                    </li>
+                    <li>
+                        <a href="/calendar">Calendar</a>
+                    </li>
+
+
+<style>
+.dropdown {
+    position: relative;
+    display: inline-block;
+	padding-top: 13px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+	color: black;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+</style>
+
+
+
+<li>
+<div class="dropdown">
+  <a href="home.html"> COLLEGE</a>
+  <div class="dropdown-content">
+    <a href="#" style=" color: black;" >ERC</a>
+	<a href="#" style=" color: black;" >Marshall</a>
+    <a href="#" style=" color: black;" >Muir</a>
+    <a href="#" style=" color: black;" >Revelle</a>
+    <a href="#" style=" color: black;" >Sixth</a>
+    <a href="#" style=" color: black;" >Warren</a>
+    <a href="#" style=" color: black;" >Price Center</a>
+    <a href="#" style=" color: black;" >Off Campus</a>
+  </div>
+</div>
+</li>
+
+	 				<li>
+                        <a href="/login">Sign In</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <br>
+                <h2><center>Edit Event</center></h2>
+                        <hr style="color: gray"class="small">
+          
+      <br>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!--<p>Want to submit an event? Fill out the form below to and we will try to get back to you within 24 hours!</p>-->
+                <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+                <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+                <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+                <form name="sentMessage" id="contactForm" action="/updateEvent" method="post" novalidate>
+                    <input type="hidden" name="eventID" value="{{ id }}">
+                    <input type="hidden" name="originalTitle" value="{{ name }}">
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Event Title</label>
+                            <input type="text" class="form-control" placeholder="Event Name" id="name" name="title" value="{{name}}" required data-validation-required-message="Please enter your name.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Event Description</label>
+                            <textarea rows="5" cols="80" class="form-control" placeholder="Message" id="message" name="Description" value="{{description}}" required
+                                data-validation-required-message="Please enter a message.">{{description}}</textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <p>Event Start Date</p>
+                            <select id="startYear" name="StartYear">
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                </select>
+                            <select id="startMonth" name="StartMonth">
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                                </select>
+                            <select id="startDay" name="StartDay"></select>
+                            <select id="startHour" name="StartHour">
+                                <option value="00">12 AM</option>
+                                <option value="01">1 AM</option>
+                                <option value="02">2 AM</option>
+                                <option value="03">3 AM</option>
+                                <option value="04">4 AM</option>
+                                <option value="05">5 AM</option>
+                                <option value="06">6 AM</option>
+                                <option value="07">7 AM</option>
+                                <option value="08">8 AM</option>
+                                <option value="09">9 AM</option>
+                                <option value="10">10 AM</option>
+                                <option value="11">11 AM</option>
+                                <option value="12">12 PM</option>
+                                <option value="13">1 PM</option>
+                                <option value="14">2 PM</option>
+                                <option value="15">3 PM</option>
+                                <option value="16">4 PM</option>
+                                <option value="17">5 PM</option>
+                                <option value="18">6 PM</option>
+                                <option value="19">7 PM</option>
+                                <option value="20">8 PM</option>
+                                <option value="21">9 PM</option>
+                                <option value="22">10 PM</option>
+                                <option value="23">11 PM</option>
+                                </select>
+                            <select id="startMinute" name="StartMinute">
+                                <option value="00">00 minutes</option>
+                                <option value="10">10 minutes</option>
+                                <option value="20">20 minutes</option>
+                                <option value="30">30 minutes</option>
+                                <option value="40">40 minutes</option>
+                                <option value="50">50 minutes</option>
+                                </select>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <p>Event End Date</p>
+                            <select id="endYear" name="EndYear">
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                </select>
+                            <select id="endMonth" name="EndMonth">
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                                </select>
+                            <select id="endDay" name="EndDay"></select>
+                            <select id="endHour" name="EndHour">
+                                <option value="00">12 AM</option>
+                                <option value="01">1 AM</option>
+                                <option value="02">2 AM</option>
+                                <option value="03">3 AM</option>
+                                <option value="04">4 AM</option>
+                                <option value="05">5 AM</option>
+                                <option value="06">6 AM</option>
+                                <option value="07">7 AM</option>
+                                <option value="08">8 AM</option>
+                                <option value="09">9 AM</option>
+                                <option value="10">10 AM</option>
+                                <option value="11">11 AM</option>
+                                <option value="12">12 PM</option>
+                                <option value="13">1 PM</option>
+                                <option value="14">2 PM</option>
+                                <option value="15">3 PM</option>
+                                <option value="16">4 PM</option>
+                                <option value="17">5 PM</option>
+                                <option value="18">6 PM</option>
+                                <option value="19">7 PM</option>
+                                <option value="20">8 PM</option>
+                                <option value="21">9 PM</option>
+                                <option value="22">10 PM</option>
+                                <option value="23">11 PM</option>
+                                </select>
+                            <select id="endMinute" name="EndMinute">
+                                <option value="00">00 minutes</option>
+                                <option value="10">10 minutes</option>
+                                <option value="20">20 minutes</option>
+                                <option value="30">30 minutes</option>
+                                <option value="40">40 minutes</option>
+                                <option value="50">50 minutes</option>
+                                </select>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                    <!-- Need a way to add pictures. -->
+
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <p>Location</p>
+                            <select id="location" name="Location">
+                                <option value="ERC">ERC</option>
+                                <option value="Marshall">Marshall</option>
+                                <option value="Muir">Muir</option>
+                                <option value="Revelle">Revelle</option>
+                                <option value="Sixth">Sixth</option>
+                                <option value="Warren">Warren</option>
+                                <option value="Price Center">Price Center</option>
+                                <option value="Off-Campus">Off-Campus</option>
+                                </select>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                    <!-- Need to add tags. -->
+
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" placeholder="Email Address" id="email" name="Email" required data-validation-required-message="Please enter your email address.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Phone Number</label>
+                            <input type="phone" class="form-control" placeholder="Phone Number" id="phone" name="Phone" required data-validation-required-message="Please enter your phone number.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+
+                    <!-- Possibly add a field for a link to website. -->
+
+                    <br>
+                    <div id="success"></div>
+
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/vendor/bootstrap/js/jqBootstrapValidation.js"></script>
+    <script src="/vendor/bootstrap/js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/vendor/bootstrap/js/clean-blog.min.js"></script>
+
+</body>
+
+</html>

@@ -256,7 +256,7 @@ router.get('/editEvent/:id', function(req, res) {
 	console.log("We are at edit event. The get function is working");
 	var identification = req.params.id;
 	eventData.findOne({"_id": identification}, function(err, evt) {
-		res.render('editEvent', {name: evt.Title, start: evt.StartTime, end: evt.EndTime, description: evt.Details, id: identification});
+		res.render('editEvent_new', {name: evt.Title, start: evt.StartTime, end: evt.EndTime, description: evt.Details, id: identification});
 	})
 })
 /**router.get('/editEvent/:title/:timeStart/:endTime/:details/:id', function(req, res) {
@@ -269,10 +269,13 @@ router.post('/updateEvent', function(req, res) {
 	var oldTitle = req.body.originalTitle;
 	var title = req.body.title;
 	var details = req.body.Description;
-	var startTime = req.body.StartYear + "-" + req.body.StartMonth + "-" + req.body.StartDay + "T" + req.body.StartHour + ":" + req.body.StartMinute + ":00-08:00Z";
-	var endTime = req.body.EndYear + "-" + req.body.EndMonth + "-" + req.body.EndDay + "T" + req.body.EndHour + ":" + req.body.EndMinute + ":00-08:00Z";
-	eventData.update({"Title": oldTitle}, {$set: {"Title": title, "Details": details, "StartTime": startTime, "EndTime": endTime}}, function(err, user) {
-		res.redirect('http://localhost:3000/eventDetail?query=' + id);
+	var startTime = req.body.StartYear + "-" + req.body.StartMonth + "-" + req.body.StartDay + "T" + req.body.StartHour + ":" + req.body.StartMinute + ":00-08:00";
+	var endTime = req.body.EndYear + "-" + req.body.EndMonth + "-" + req.body.EndDay + "T" + req.body.EndHour + ":" + req.body.EndMinute + ":00-08:00";
+    //console.log(startTime);
+    //console.log(endTime);
+    //console.log(new Date(startTime) + " " + new Date(endTime) );
+	eventData.update({"Title": oldTitle}, {$set: {"Title": title, "Details": details, "StartTime": new Date(startTime), "EndTime": new Date(endTime), "SubmitTime": new Date(), "Email": req.body.Email, "Phone": req.body.Phone}}, function(err, user) {
+		res.redirect('/eventDetail?query=' + id);
 	});
 });
 

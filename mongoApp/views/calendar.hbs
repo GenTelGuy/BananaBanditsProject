@@ -31,6 +31,40 @@
 
 </head>
 
+<style>
+.dropdown {
+    position: relative;
+    display: inline-block;
+	padding-top: 13px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+	color: black;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+</style>
+    
 <body>
 
     <!-- Navigation -->
@@ -42,27 +76,42 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html">Event Snap</a>
+                <a class="navbar-brand" href="/">Event Snap</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="index.html">All Events</a>
+                        <a href="/eventBrowser">All Events</a>
                     </li>
                     <li>
-                        <a href="events_calendar.html">Calendar</a>
+                        <a href="/calendar">Calendar</a>
                     </li>
+                    
                     <li>
-                        <a href="post.html">College</a>
+                        
+                        <div class="dropdown">
+                            <a> COLLEGE</a>
+                            <div class="dropdown-content">
+                            <a href="eventSearch.html" style=" color: black;" >ERC</a>
+	                        <a href="eventSearch.html" style=" color: black;" >Marshall</a>
+                            <a href="eventSearch.html" style=" color: black;" >Muir</a>
+                            <a href="eventSearch.html" style=" color: black;" >Revelle</a>
+                            <a href="eventSearch.html" style=" color: black;" >Sixth</a>
+                            <a href="eventSearch.html" style=" color: black;" >Warren</a>
+                            <a href="eventSearch.html" style=" color: black;" >Price Center</a>
+                            <a href="eventSearch.html" style=" color: black;" >Off Campus</a>
+                            </div>
+                        </div>
                     </li>
+                    
                     <li>
-                        <a href="contact.html">Sign in </a>
+                        <a href="/login">Sign in </a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="contact.html">Search </a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

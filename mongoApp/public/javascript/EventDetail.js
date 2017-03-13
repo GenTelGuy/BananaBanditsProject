@@ -31,6 +31,8 @@ function updateEventsList() {
             
             
             $('#title').text(data[i].Title);
+            //$('#date').text(correctDate(data[i].startTime));
+            //$('#time').text(correctTime())
         }
     });
 }
@@ -41,9 +43,9 @@ function eventDiv(data) {
     ret = document.createElement("p");
     ret.className = "desc-text";
 
-    header = document.createElement("h3");
+    /*header = document.createElement("h3");
     header.appendChild(document.createTextNode(data.Title));
-    ret.appendChild(header);
+    ret.appendChild(header);*/
 
     startTime = document.createElement("p");
     startTime.appendChild(document.createTextNode("Start Time: " + correctDate(data.StartTime)));
