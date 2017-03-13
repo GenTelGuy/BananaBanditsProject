@@ -1,4 +1,7 @@
+var allEvents = [];
+
 $(document).ready(function () {
+    
     // when user clicks the button, make a list of the events
     $('#updateEvents').click(function () {
         updateEventsList();
@@ -9,8 +12,10 @@ $(document).ready(function () {
         updateEventDivs();
     });
 
-    var allEvents = [];
-
+    
+    updateEventsList();
+    filterEvents();
+    updateEventDivs();
 });
 
 // update the list of events that are shown
@@ -67,41 +72,68 @@ function updateEventDivs() {
 
 // make the div for an event
 function eventDiv(data) {
+    
+    /*<div class="post-preview">
+                    <a href="post.html">
+                        <h2 class="post-title">
+                        	EVENT 2
+						</h2>
+                        <h3 class="post-subtitle">
+                        	Details <br>
+							Date <br>
+							Location <br>
+							Time <br>
+							Link to Social Media <br>
+						</h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#">Organization</a> Date</p></div>
+                <hr>*/
 
     ret = document.createElement("div");
-    ret.className = "Event";
+    ret.className = "post-preview";
+    
+    anchor=document.createElement("a");
+    anchor.href = "/eventDetail?query=" + data._id;
+    ret.appendChild(anchor);
 
-    header = document.createElement("h3");
+    header = document.createElement("h2");
+    header.className="post-title";
     header.appendChild(document.createTextNode(data.Title));
-    ret.appendChild(header);
+    anchor.appendChild(header);
 
-    startTime = document.createElement("p");
+    startTime = document.createElement("h3");
+    startTime.className = "post-subtitle";
     startTime.appendChild(document.createTextNode("Start Time: " + correctDate(data.StartTime)));
-    ret.appendChild(startTime);
+    anchor.appendChild(startTime);
 
-    descriptionHeader = document.createElement("h1");
+    /*descriptionHeader = document.createElement("h3");
+    descriptionHeader.className = "post-subtitle";
     descriptionHeader.appendChild(document.createTextNode("Details: "));
-    ret.appendChild(startTime);
+    anchor.appendChild(startTime);*/
 
-    endTime = document.createElement("p");
+    endTime = document.createElement("h3");
+    endTime.className = "post-subtitle";
     endTime.appendChild(document.createTextNode("End Time: " + correctDate(data.EndTime)));
-    ret.appendChild(endTime);
+    anchor.appendChild(endTime);
 
-    descriptionHeader = document.createElement("h1");
+    descriptionHeader = document.createElement("h3");
+    descriptionHeader.className = "post-subtitle";
     descriptionHeader.appendChild(document.createTextNode("Details: "));
-    ret.appendChild(endTime);
+    
+    //ret.appendChild(endTime);
 
-    descriptionText = document.createElement("p");
+    descriptionText = document.createElement("h3");
+    descriptionText.className = "post-subtitle";
     descriptionText.appendChild(document.createTextNode(data.Details));
-    ret.appendChild(descriptionText);
+    anchor.appendChild(descriptionText);
 
     // make a link to take the user to the detail page for this event
-    detailLink = document.createElement("a");
+    //detailLink = document.createElement("a");
     // the url contains the id of the event object
-    detailLink.href = "http://localhost:3000/eventDetail?query=" + data._id;
-    linkText = document.createTextNode("See Event Details");
-    detailLink.appendChild(linkText);
-    ret.appendChild(detailLink);
+    //detailLink.href = "http://localhost:3000/eventDetail?query=" + data._id;
+    //linkText = document.createTextNode("See Event Details");
+    //detailLink.appendChild(linkText);
+    //anchor.appendChild(detailLink);
 
     var form = document.createElement("form");
     form.setAttribute('method', "post");
@@ -116,6 +148,9 @@ function eventDiv(data) {
     var button = document.createElement("button");
     button.setAttribute('type', "submit");
     button.innerHTML = 'Delete';
+    
+    var myHR = document.createElement("HR");
+    ret.appendChild(myHR);
 
     /**form.appendChild(input);
     form.appendChild(button);

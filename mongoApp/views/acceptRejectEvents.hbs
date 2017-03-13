@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--navbar ready-->
 <html lang="en">
 
 <head>
@@ -10,16 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Event Snap</title>
+    <title>Event Snap - Accept/Reject Events</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../public/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="/css/clean-blog.css" rel="stylesheet">
+    <link href="../public/css/clean-blog.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../public/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -34,8 +33,7 @@
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+      <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
@@ -50,10 +48,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/eventBrowser">All Events</a>
+                        <a href="eventSearch.html">All Events</a>
                     </li>
                     <li>
-                        <a href="/calendar">Calendar</a>
+                        <a href="calendar.html">Calendar</a>
                     </li>
 
 
@@ -110,7 +108,7 @@
 </li>
 
 	 				<li>
-                        <a href="login">Sign In</a>
+                        <a href="login.html">Sign In</a>
                     </li>
                 </ul>
             </div>
@@ -118,17 +116,10 @@
         </div>
         <!-- /.container -->
     </nav>
-
+	<br>
+	<h2> <center>Accept/Reject Events</center><h2>
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('/img/geisel.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>Event Snap</h1>
-                        <hr class="small">
-                        <span class="subheading">breaking stereotypes</span>
 						<br>
                         <style>
         input[type=text] {
@@ -146,99 +137,25 @@
     </style>
 
     <form>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="/javascript/EventList.js"></script>
-        </head>
-                <body>
-     <input type="text" placeholder="Search" name="Search" id="searchBar">
-</body>
-</html>
+        <center><input type="text" name="search" placeholder="Search for an event or organization . . ."></center>
     </form>
+
 					</div>
                 </div>
             </div>
         </div>
     </header>
 
-
-
-
- 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!--
-        <body>
-
-		 <div class="slideshow-container">
-			
-			<div class="mySlides">
-  				<img src="/img/blackscreen.jpg" style="width:50%">
-			</div>
-
-			<div class="mySlides">
-				<img src="/img/blackscreen.jpg" style="width:50%">
-			</div>
-
-			<div class="mySlides">
-				<img src="/img/blackscreen.jpg" style="width:50%">
-			</div>
-
-			<div class="mySlides">
-  				<img src="/img/blackscreen.jpg" style="width:50%">
-			</div>
-
-			<div class="mySlides">
-				<img src="/img/blackscreen.jpg" style="width:50%">
-			</div>
-
-			<div class="mySlides">
-				<img src="/img/blackscreen.jpg" style="width:50%">
-			</div>
-	
-		</div>
-		<br>
-
-		<div style="text-align:center">
-  			<span class="dot"></span> 
-		    <span class="dot"></span> 
-  			<span class="dot"></span> 
-  			<span class="dot"></span> 
-  			<span class="dot"></span> 
-  			<span class="dot"></span> 
-	 	</div>
-        
-
-        <script>
-            var slideIndex = 0;
-            showSlides();
-
-            function showSlides() {
-                var i;
-                var slides = document.getElementsByClassName("mySlides");
-                var dots = document.getElementsByClassName("dot");
-                for (i = 0; i < slides.length; i++) {
-                    slides[i].style.display = "none";  
-                }
-                slideIndex++;
-                if (slideIndex> slides.length) {slideIndex = 1}    
-                for (i = 0; i < dots.length; i++) { 
-                    dots[i].className = dots[i].className.replace(" active", "");
-                }
-                slides[slideIndex-1].style.display = "block";  
-                dots[slideIndex-1].className += " active";
-                setTimeout(showSlides, 7000); // Change image every 7 seconds
-            }
-        </script>
-
 </body>
--->
     <!-- Main Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-5 col-lg-offset-1">
                 <div class="post-preview">
-                    <a href="post.html">
+                    <a href="EventDetail_front.html">
                         <h2 class="post-title">
                         	EVENT 1
+							<button type="submit" class="btn btn-default" style="float:right;">Reject</button>
+							<button type="submit" class="btn btn-default" style="float:right;">Accept</button>
 						</h2>
                         <h3 class="post-subtitle">
                         	Details <br>
@@ -252,9 +169,11 @@
                 </div>
              	<hr>
                 <div class="post-preview">
-                    <a href="post.html">
+                    <a href="EventDetail_front.html">
                         <h2 class="post-title">
                         	EVENT 2
+							<button type="submit" class="btn btn-default" style="float:right;">Reject</button>
+							<button type="submit" class="btn btn-default" style="float:right;">Accept</button>
 						</h2>
                         <h3 class="post-subtitle">
                         	Details <br>
@@ -271,9 +190,11 @@
 
 
                 <div class="post-preview">
-                    <a href="post.html">
+                    <a href="EventDetail_front.html">
                         <h2 class="post-title">
                         	EVENT 3
+							<button type="submit" class="btn btn-default" style="float:right;">Reject</button>
+							<button type="submit" class="btn btn-default" style="float:right;">Accept</button>
 						</h2>
                         <h3 class="post-subtitle">
                         	Details <br>
@@ -286,10 +207,12 @@
                     <p class="post-meta">Posted by <a href="#">Organization</a> Date</p></div>
                 <hr>
                 <div class="post-preview">
-                    <a href="post.html">
+                    <a href="EventDetail_front.html">
                         <h2 class="post-title">
                         	EVENT 4
-						</h2>
+							<button type="submit" class="btn btn-default" style="float:right;">Reject</button>
+							<button type="submit" class="btn btn-default" style="float:right;">Accept</button>
+					</h2>
                         <h3 class="post-subtitle">
                         	Details <br>
 							Date <br>
@@ -302,70 +225,26 @@
 
                 <hr>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<body>
-
-	                       
-            <!-- Pager -->
-                <ul class="pager">
-                    <li class="next">
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                    <p class="copyright text-muted">Copyright &copy; Banana Bandits 2017</p>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- jQuery -->
-    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="../public/vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../public/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="/vendor/bootstrap/js/jqBootstrapValidation.js"></script>
-    <script src="/vendor/bootstrap/js/contact_me.js"></script>
+    <script src="../public/vendor/bootstrap/js/jqBootstrapValidation.js"></script>
+    <script src="../public/vendor/bootstrap/js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="/vendor/bootstrap/js/clean-blog.min.js"></script>
+    <script src="../public/vendor/bootstrap/js/clean-blog.min.js"></script>
 
 </body>
 

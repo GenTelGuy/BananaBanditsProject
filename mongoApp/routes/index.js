@@ -17,7 +17,7 @@ var userFound = false;
 };*/
 /* GET home page. */
 router.get('/login', function (req, res, next) {
-	res.render('index', { title: 'Express' });
+	res.render('login', { title: 'Express' });
 });
 
 router.get('/calendar', function (req, res, next) {
@@ -43,9 +43,11 @@ router.get('/createAccount', function (req, res, next) {
 	//	if(!req.session.user.Admin) {
 	//		res.render('notAdmin');
 	//	}
-		else {
-			res.render('createAccount');
-		}
+	else {
+		//res.render('createAccount');
+        //res.render('createAccountNew');
+        res.render('registerNewAccount');
+	}
 	//}
 
 });
@@ -320,7 +322,13 @@ router.post('/createEvent', function (req, res, next) {
 });
 
 router.get('/eventBrowser', function (req, res, next) {
-	res.render('eventBrowser');
+	//res.render('eventBrowser');
+    eventData.find({}, function(err, evts){
+			//console.log(user);
+        
+			res.render('eventSearch', {allEvents: evts});
+		});
+    //res.render('eventSearch');
 });
 
 router.get('/allEventData', function (req, res, next) {
@@ -341,6 +349,34 @@ router.get('/eventDetailQuery', function (req, res, next) {
 	found_id.then(function (data) {
 		res.send(data);
 	});
+});
+
+router.get('/acceptRejectEvents', function (req, res, next) {
+	res.render('acceptRejectEvents')
+});
+
+router.get('/orgDetail', function (req, res, next) {
+	res.render('orgDetail')
+});
+
+router.get('/forgotPassword', function (req, res, next) {
+	res.render('forgotPassword')
+});
+
+router.get('/pastEvents', function (req, res, next) {
+	res.render('pastEvents')
+});
+
+router.get('/forgotPassword', function (req, res, next) {
+	res.render('forgotPassword')
+});
+
+router.get('/reportedEvents', function (req, res, next) {
+	res.render('reportedEvents')
+});
+
+router.get('/updatePassword', function (req, res, next) {
+	res.render('updatePassword')
 });
 
 module.exports = router;
