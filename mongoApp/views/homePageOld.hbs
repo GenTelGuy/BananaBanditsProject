@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--navbar ready-->
 <html lang="en">
 
 <head>
@@ -16,7 +15,7 @@
     <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="/css/clean-blog.css" rel="stylesheet">
+    <link href="css/clean-blog.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -43,7 +42,7 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="/">Event Snap</a>
+                <a class="navbar-brand" href="index.html">Event Snap</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -53,68 +52,18 @@
                         <a href="/eventBrowser">All Events</a>
                     </li>
                     <li>
-                        <a href="/calendar">Calendar</a>
+                        <a href="calendar">Calendar</a>
                     </li>
-
-
-<style>
-.dropdown {
-    position: relative;
-    display: inline-block;
-	padding-top: 13px;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-	color: black;
-}
-
-.dropdown-content a {
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-</style>
-
-
-
-<li>
-<div class="dropdown">
-<a> COLLEGE</a>
-  <div class="dropdown-content">
-    <a href="eventSearch.html" style=" color: black;" >ERC</a>
-	<a href="eventSearch.html" style=" color: black;" >Marshall</a>
-    <a href="eventSearch.html" style=" color: black;" >Muir</a>
-    <a href="eventSearch.html" style=" color: black;" >Revelle</a>
-    <a href="eventSearch.html" style=" color: black;" >Sixth</a>
-    <a href="eventSearch.html" style=" color: black;" >Warren</a>
-    <a href="eventSearch.html" style=" color: black;" >Price Center</a>
-    <a href="eventSearch.html" style=" color: black;" >Off Campus</a>
-  </div>
-</div>
-</li>
-<li>
-						<a href="submitEvent.html">Submit Event</a>
-					</li>
-
+                    <li>
+                        <a href="contact.html">College</a>
+                    </li>
 	 				<li>
-                        <a href="login">Sign In</a>
+                        <a href="/login">Sign In</a>
                     </li>
+					<li>
+                        <a href="post.html">Search</a>
+                    </li>
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -124,7 +73,7 @@
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('/img/geisel.jpg')">
+    <header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -132,46 +81,16 @@
                         <h1>Event Snap</h1>
                         <hr class="small">
                         <span class="subheading">breaking stereotypes</span>
-						<br>
-                        <style>
-        input[type=text] {
-            width: 130px;
-            box-sizing: border-box;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-			color: black;
-            background-color: white;
-            background-repeat: no-repeat;
-            padding: 12px 20px 12px 40px;
-            width: 90%;
-        }   
-    </style>
-
-    <form>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="/javascript/EventList.js"></script>
-        </head>
-                <body>
-     <input type="text" placeholder="Search" name="Search" id="searchBar">
-</body>
-</html>
-    </form>
-					</div>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
-
-
-
-
  
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!--
-        <body>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<body>
 
-		 <div class="slideshow-container">
+		<!--<div class="slideshow-container">
 			
 			<div class="mySlides">
   				<img src="/img/blackscreen.jpg" style="width:50%">
@@ -197,7 +116,7 @@
 				<img src="/img/blackscreen.jpg" style="width:50%">
 			</div>
 	
-		</div>
+		</div> 
 		<br>
 
 		<div style="text-align:center">
@@ -207,8 +126,7 @@
   			<span class="dot"></span> 
   			<span class="dot"></span> 
   			<span class="dot"></span> 
-	 	</div>
-        
+	 	</div> -->
 
         <script>
             var slideIndex = 0;
@@ -233,7 +151,6 @@
         </script>
 
 </body>
--->
     <!-- Main Content -->
     <div class="container">
         <div class="row">
@@ -312,6 +229,7 @@
             <!-- Pager -->
                 <ul class="pager">
                     <li class="next">
+                        <a href="#">See All Events</a>
                     </li>
                 </ul>
             </div>
@@ -364,11 +282,11 @@
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Contact Form JavaScript -->
-    <script src="/vendor/bootstrap/js/jqBootstrapValidation.js"></script>
-    <script src="/vendor/bootstrap/js/contact_me.js"></script>
+    <script src="/javascript/jqBootstrapValidation.js"></script>
+    <script src="/javascript/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="/vendor/bootstrap/js/clean-blog.min.js"></script>
+    <script src="/javascript/clean-blog.min.js"></script>
 
 </body>
 
