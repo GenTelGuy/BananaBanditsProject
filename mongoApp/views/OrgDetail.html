@@ -1,36 +1,39 @@
 <!DOCTYPE html>
-<!-- navbar ready-->
-<html>
-
+<!--Navbar ready-->
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Event Snap - Forgot Password</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <title>Event Snap - Organization Detailsf</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="../public/javascript/EventDetail.js"></script>
+  <!-- Bootstrap Core CSS -->
+    <link href="../public/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="/css/clean-blog.css" rel="stylesheet">
+    <link href="../public/css/clean-blog.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../public/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
+</head>
+<body> 
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <!--<header class="event-pic" style="background-image: url('img/geisel.jpg')">-->
 
-<body>
+    <!--</header>-->
+    <h1 id="title">Organization Name</h1>
+    <hr>
+        <!-- Navigation -->
+ <body>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -41,17 +44,17 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="/">Events Snap</a>
+                <a class="navbar-brand" href="homePage.html">Events Snap</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="/eventBrowser">All Events</a>
+                        <a href="eventSearch.html">All Events</a>
                     </li>
                     <li>
-                        <a href="/calendar">Calendar</a>
+                        <a href="calendar.html">Calendar</a>
                     </li>
 
 
@@ -90,7 +93,6 @@
 </style>
 
 
-
 <li>
 <div class="dropdown">
 <a> COLLEGE</a>
@@ -108,7 +110,7 @@
 </li>
 
 	 				<li>
-                        <a href="/login">Sign In</a>
+                        <a href="login.html">Sign In</a>
                     </li>
                 </ul>
             </div>
@@ -116,12 +118,12 @@
         </div>
         <!-- /.container -->
     </nav>
-<br>
-
-<style>
+<br>        <!-- /.container -->
+        
+     <style>
 form {
     border: 3px solid #f1f1f1;
-	box-sizing: border-box;
+	padding-left: 20px;
 }
 
 input[type=text], input[type=password] {
@@ -133,21 +135,6 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
 }
 
-button {
-    background-color: #0caeff;
-    padding: 14px 2px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 10%;
-	font-family: Lora, 'Times New Roman', serif; 
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-
 span.psw {
     float: right;
     padding-top: 16px;
@@ -155,33 +142,45 @@ span.psw {
 
 /* Change styles for span and cancel button on extra small screens */
 </style>
-<body>
 
-<h2><center>Account Recovery</center></h2>
-
-<hr>
-    <center> 
-    <label><b>Email</b></label>
-    <form action="/forgetPassword/submit" method="post">
-    Enter Email
-    <input type="text" placeholder="Enter Email" name="email" required><br> 
-    Enter Password
-    <input type="password" placeholder="Password" name="password"><br>
-    Confirm Password
-    <input type="password" placeHolder="Password"name="confirmPassword"><br>
-
-    <button type="submit" class="btn btn-default" style="padding-left:px;">
-         Update</button>
-	<br>
-	</form>
-
-    <p><a href="/login">Login</a></p>
-    <p><a href="/createAccount">Register Organization</a></p>
-	</center>
-<hr>
-
+    <div class="orgcontainer">
+        <h2 class="org-pic" style="background-image:    url('../public/img/geisel.jpg')">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                    </div>
+                </div>
+            </div>
+        </h2>
+        <div class="org_desc">
+            Org Description
+        </div>
+        <div class="org_details_list" id="eventList">
+            Event List
+        </div>
+    </div>
+    <!--<button type="submit" class="btn-btn-default">Submit Event</button>-->
+    <!--<button class="submitbutton" href=#>Submit Event</button>-->
+     <p style="padding-left:50px">
+     <button type="submit" class="btn btn-default" style="padding-left:px;">
+         <a href="submitEvent.html">Add Event</a></button>
+     <br>
+     <br>
+      <button type="submit" class="btn btn-default" style="padding-left:px;">
+         <a href="eventSearch">Event History</a></button>
+     <br>
+     <br>
+     </p>
+    <hr>
+        <center><p><a href="#" style="padding-left:30px;">Delete Account</a></p></center>
+        <!-- Footer -->
+    <footer>
+        <div class="container">
+        
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
-
-
-
