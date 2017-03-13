@@ -26,7 +26,8 @@ function updateEventsList() {
         allEvents = [];
         // make divs for each event and display them
         for (i = 0; i < data.length; i++) {
-            createdDiv = eventDiv(data[i]);
+            if(!data[i].Title || !data[i].Details) continue;
+	    createdDiv = eventDiv(data[i]);
             a = {
                 visible: true,
                 searchableText: [data[i].Title.toLowerCase(),

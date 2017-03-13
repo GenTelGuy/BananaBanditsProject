@@ -214,6 +214,14 @@ router.post('/deleteEvent', function(req, res){
 	});
 });
 
+router.get('/accountId',function(req,res,next){
+	if(!req.session.user){
+		res.send('requireLogin');
+	}
+	console.log(req.session.user._id);
+	res.send(req.session.user._id);
+});
+
 router.get('/checkAdmin', function(req, res, next){
 	if(!req.session.user.Admin) {
 		console.log("not admin");
@@ -380,6 +388,16 @@ router.get('/reportedEvents', function (req, res, next) {
 
 router.get('/updatePassword', function (req, res, next) {
 	res.render('updatePassword')
+});
+
+router.get('/account',function (req,res,next){
+	if(req.session.user){
+        res.render('OrgDetail');
+    }
+    else{
+        res.render('requireLogin');
+    }
+
 });
 
 module.exports = router;
