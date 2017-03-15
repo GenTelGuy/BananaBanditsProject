@@ -30,7 +30,8 @@ router.get('/', function (req, res, next) {
 
 router.get('/login/:email', function (req, res, next) {
 	var retEmail = req.params.email;
-	res.render('loggedin', { email: retEmail });
+	res.render('homePage');
+	//res.render('loggedin', { email: retEmail });
 	console.log('retEmail');
 });
 
@@ -89,7 +90,8 @@ router.post('/login/submit', function (req, res, next) {
 		}
 		else {
 			req.session.user = user;
-			res.redirect('/login/' + orgEmail);
+			res.redirect('/');
+			//res.redirect('/login/' + orgEmail);
 		}
 	});
 	//var data = userData.findOne({ $and: [{ "Email": orgEmail }, { "Password": orgPassword }] });
@@ -222,6 +224,15 @@ router.get('/accountId',function(req,res,next){
 	res.send(req.session.user._id);
 });
 
+router.get('/getSignedIn',function(req,res,next){
+	if(req.session.user){
+		res.send("USER");
+	}
+	else{
+		res.send("NOT");
+	}
+});
+
 router.get('/checkAdmin', function(req, res, next){
 	if(!req.session.user.Admin) {
 		console.log("not admin");
@@ -231,6 +242,13 @@ router.get('/checkAdmin', function(req, res, next){
 		console.log("admin");
 		res.send('admin');
 	}
+});
+
+router.get('/fetchOrgName', function(req,res,next){
+	if(!req.session.user){ 
+		res.send('requireLogin');
+	}
+	res.send(req.session.user.Org);
 });
 
 router.post('/pinEvent', function(req, res) {

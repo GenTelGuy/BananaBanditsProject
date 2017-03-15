@@ -13,6 +13,7 @@ $(document).ready(function () {
     });
 
     
+    changeAccess();
     updateEventsList();
     filterEvents();
     updateEventDivs();
@@ -158,6 +159,18 @@ function eventDiv(data) {
     ret.appendChild(form);*/
 
     return (ret);
+}
+
+function changeAccess(){
+	$.get('http://localhost:3000/getSignedIn', {}, function (data){
+                        if(data=="USER"){
+				$('#access').empty();
+				console.log("Signed in");
+				$('#access').append('<a href="account">Account</a>');
+				$('#list').append('<li><a href="logout">Sign Out</a></li>');
+			}
+
+	});
 }
 
 // makes the date appear in a readable format
