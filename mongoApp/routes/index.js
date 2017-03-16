@@ -218,6 +218,14 @@ router.get('/deleteAll', function (req, res) {
 	});
 });
 
+router.post('/deleteAccount', function(req, res){
+	var name = req.body.accountname;
+	console.log(name);
+	userData.remove({"Org": name}, function(err, user) {
+		res.redirect('/account');
+	});
+});
+
 router.post('/deleteEvent', function(req, res){
 	var name = req.body.eventname;
 	console.log(name);
@@ -370,12 +378,9 @@ router.post('/createEvent', function (req, res, next) {
 		Featured: false
 	}
 	var test = req.session.Email;
-	console.log(req.session.user.Email);
 	// add the event to the database
-	console.log(req.session.user)
 	eventData.insert(event);
-	console.log('saved event to database');
-	res.redirect('/submitEvent')
+	res.redirect('/account')
 });
 
 router.get('/eventBrowser', function (req, res, next) {

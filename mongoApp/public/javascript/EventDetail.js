@@ -66,6 +66,16 @@ function eventDiv(data) {
     descriptionText = document.createElement("p");
     descriptionText.appendChild(document.createTextNode(data.Details));
     ret.appendChild(descriptionText);
+
+    orgInfo=document.createElement("a");
+    orgInfo.href="/accountDetail?query="+data.Org;
+    ret.appendChild(orgInfo);
+
+    orgConnect=document.createElement("p");
+    orgConnect.className="post-subtitle";
+    orgConnect.appendChild(document.createTextNode("Organization Page"));
+    orgInfo.appendChild(orgConnect);
+
     
     contactEmail=document.createElement("p");
     contactEmail.className="post-subtitle";
@@ -78,6 +88,8 @@ function eventDiv(data) {
     ret.appendChild(contactNumber);
 
     form = document.createElement("form");
+    rgInfo.className="post-subtitle";i
+
             form.setAttribute('action', "/deleteEvent");
             form.setAttribute('method', "post");
             form.appendChild(ret);
@@ -150,7 +162,7 @@ function eventDiv(data) {
     	    clearButton=document.createElement("button");
  	    clearButton.setAttribute('type',"submit");
 	    clearButton.setAttribute('formaction',"/clearReport");
-	    clearButton.innerHTML='clear';
+	    clearButton.innerHTML='Clear Reports';
 
 	    acceptButton=document.createElement("button");
 	    acceptButton.setAttribute('type',"submit");

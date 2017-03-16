@@ -48,7 +48,7 @@ function updateReportedEventsList() {
         $('#eventList').empty();
         allEvents = [];
         $.get("http://localhost:3000/accountId",{},function(stuff){
-	for (i = 0; i < data.length; i++) {
+	for (i = data.length-1; i >= 0; i--) {
 	    if(!data[i].Title || !data[i].Details) continue;
 	    //if(!data[i].Reports) continue;
 	    if(data[i].Org!=stuff) continue;

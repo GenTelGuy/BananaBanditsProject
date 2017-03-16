@@ -14,7 +14,7 @@ function getQueryVariable(variable) {
 function updateAccountsList() {
     // fetch data on the events in the database
     response = $.get('http://localhost:3000/accountDetailQuery', {"$oid":getQueryVariable("query")}, function (data) {
-        $('#accountDiv').empty();
+        $('#accountList').empty();
         allAccounts = [];
         for (i = 0; i < data.length; i++) {
             if(!data[i].Org) continue;
@@ -24,7 +24,6 @@ function updateAccountsList() {
                 visible: true,
                 searchableText: [data[i].Org.toLowerCase(),
                 data[i].OrgBio.toLowerCase()],
-                div: createdDiv
             }
             allAccounts.push(a);
 	    $('#accountDiv').append(createdDiv);
@@ -33,93 +32,81 @@ function updateAccountsList() {
     });
 }
 
-// similar to updateEventsList in post.js, but queries for an event by objectID
-function updateEventsList() {
-    // direct to eventDetailQuery with the objectID
-    response = $.get('http://localhost:3000/eventDetailQuery', { "$oid": getQueryVariable("query") }, function (data) {
-        $('#eventList').empty();
-        allEvents = [];
-        for (i = 0; i < data.length; i++) {
-	    createdDiv = eventDiv(data[i]);
-        
-            a = {
-                visible: true,
-                searchableText: [data[i].Title.toLowerCase(),
-                data[i].Details.toLowerCase()],
-            }
-            allEvents.push(a);
-            $('#eventDiv').append(createdDiv);
-            
-            
-            $('#title').text(data[i].Title);
-            //$('#date').text(correctDate(data[i].startTime));
-            //$('#time').text(correctTime())
-        }
-    });
-}
-function accountDiv(data) {
-    
-    
+function accountDiv(data){
     ret = document.createElement("p");
     ret.className = "desc-text";
-    
-    anchor=document.createElement("a");
-    anchor.href = "/accountDetail?query=" + data._id;
-    ret.appendChild(anchor);
 
-    header = document.createElement("h2");
-    header.className="post-title";
-    header.appendChild(document.createTextNode(data.Org));
-    ret.appendChild(header);
 
-    descriptionHeader = document.createElement("h3");
-    descriptionHeader.className = "post-subtitle";
-    descriptionHeader.appendChild(document.createTextNode("Details: "));
-    
-
-    descriptionText = document.createElement("h3");
-    descriptionText.className = "post-subtitle";
-    descriptionText.appendChild(document.createTextNode(data.orgEmail));
+    descriptionText = document.createElement("p");
+    descriptionText.appendChild(document.createTextNode(data.OrgBio));
     ret.appendChild(descriptionText);
+    
+    contactEmail=document.createElement("p");
+    contactEmail.className="post-subtitle";
+    contactEmail.appendChild(document.createTextNode("Email: "+data.Email));
+    ret.appendChild(contactEmail);
+
+    contactNumber=document.createElement("p");
+    contactNumber.className="post-subtitle";
+    contactNumber.appendChild(document.createTextNode("Phone: "+data.Phone));
+    ret.appendChild(contactNumber);
+
     form = document.createElement("form");
-            form.setAttribute('action', "/deleteEvent");
+            form.setAttribute('action', "/deleteAccount");
             form.setAttribute('method', "post");
             form.appendChild(ret);
-    verify=document.createElement("input");
-        verify.setAttribute('type',"hidden");
-	verify.setAttribute('name',"verify");
-	verify.setAttribute('value',data.Org);
-	verify.setAttribute('formaction',"/verify");
-    verifyButton=document.createElement("button");
-        verifyButton.setAttribute('type',"submit");
-	verifyButton.setAttribute('formaction',"/verify");
-	verifyButton.innerHTML='Verify';
-	form.appendChild(verify);
-	form.appendChild(verifyButton);
-    
-    var myHR = document.createElement("HR");
-    ret.appendChild(myHR);
+
+    input = document.createElement("input");
+            input.setAttribute('type', "hidden");
+            input.setAttribute('name', "accountname")
+            input.setAttribute('value', data.Org);
+
+    accept= document.createElement("input");
+        accept.setAttribute('type',"hidden");
+	accept.setAttribute('name',"verify");
+	accept.setAttribute('value',data.Org);
+	accept.setAttribute('formaction',"/verify");
+ 
+    $.get('http://localhost:3000/checkAdmin',{},function(stuff){
+            if(stuff=="admin"){
+	    button = document.createElement("button");
+            button.setAttribute('type', "submit");
+            button.innerHTML = 'Delete';
+
+	    acceptButton=document.createElement("button");
+	    acceptButton.setAttribute('type',"submit");
+	    acceptButton.setAttribute('formaction',"/verify");
+	    acceptButton.innerHTML='Verify';
+
+            form.appendChild(input);
+            form.appendChild(button);
+
+	    form.appendChild(accept);
+	    form.appendChild(acceptButton);
+	    }
+	    });
 
     return form;
+
 }
+
 function changeAccess(){
 	$.get('http://localhost:3000/getSignedIn', {}, function (data){
                         if(data=="USER"){
 				$('#access').empty();
-				console.log("Signed in");
 				$('#access').append('<a href="account">Account</a>');
 				$('#list').append('<li><a href="logout">Sign Out</a></li>');
 			}
 
 	});
 }
+
+// set orgName at top of page
 function setOrgName(data){
 	var name=data.Org;
-	console.log(name);
 	$('#orgTitle').append("<h1>"+name+"</h1>");
 	
 	
-        //updateEventsList();
 }
 
 // makes the date appear in a readable format
@@ -143,6 +130,5 @@ function correctDate(data) {
 }
 
 
-//alert(getQueryVariable("query"));
 changeAccess();
 updateAccountsList();
