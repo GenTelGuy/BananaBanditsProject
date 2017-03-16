@@ -13,22 +13,21 @@ $(document).ready(function () {
     });
 
     
+    changeAccess();
     updateEventsList();
     filterEvents();
     updateEventDivs();
-    changeAccess();
 });
 
 // update the list of events that are shown
-function updateEventsList() {
+function updateAccountsList() {
     // fetch data on the events in the database
-    response = $.get('http://localhost:3000/allEventData', {}, function (data) {
+    response = $.get('http://localhost:3000/allAccountData', {}, function (data) {
         $('#eventList').empty();
         allEvents = [];
         // make divs for each event and display them
         for (i = 0; i < data.length; i++) {
             if(!data[i].Title || !data[i].Details) continue;
-	    if(!data[i].Featured) continue;
 	    createdDiv = eventDiv(data[i]);
             a = {
                 visible: true,
@@ -130,6 +129,7 @@ function eventDiv(data) {
     descriptionText.appendChild(document.createTextNode(data.Details));
     anchor.appendChild(descriptionText);
 
+    
     // make a link to take the user to the detail page for this event
     //detailLink = document.createElement("a");
     // the url contains the id of the event object

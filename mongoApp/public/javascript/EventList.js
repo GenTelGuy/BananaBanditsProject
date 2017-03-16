@@ -129,6 +129,7 @@ function eventDiv(data) {
     descriptionText.appendChild(document.createTextNode(data.Details));
     anchor.appendChild(descriptionText);
 
+    
     // make a link to take the user to the detail page for this event
     //detailLink = document.createElement("a");
     // the url contains the id of the event object

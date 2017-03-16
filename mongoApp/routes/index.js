@@ -62,6 +62,9 @@ router.post('/createAccount/submit', function (req, res, next) {
 	else {
 		json = false;
 	}
+	//if(req.body.orgPassword!=req.body.verifyPassword){
+	//	res.send("<h1> Passwords do not match</h1>");
+	//}
 	var account = {
 		Org: req.body.orgName,
 		Email: req.body.orgEmail,
@@ -74,8 +77,7 @@ router.post('/createAccount/submit', function (req, res, next) {
 	userData.insert(account);
 	res.render('accSubmit', { name: req.body.orgName });
 });
-
-router.post('/login/submit', function (req, res, next) {
+router.post('/login/submit',function(req,res,next){
 	console.log(req.session);
 	if(!req.session) { 
 		console.log("wtf");
@@ -182,11 +184,11 @@ router.get('/verifyAccounts', function(req, res){
 
 router.post('/verify', function(req, res) {
 	
-		var name = req.body.orgName;
+		var name = req.body.verify;
 		console.log(name);
 		userData.update({"Org": name}, {$set: {"Verified": true}}, function(err, user) {
 			console.log(user);
-			res.redirect('/verifyAccounts');
+			res.redirect('/account');
 		});
 
 		//res.redirect('/');
@@ -258,6 +260,20 @@ router.post('/pinEvent', function(req, res) {
 	});
 });
 
+router.post('/report', function(req, res) {
+	var reportname = req.body.reportEvent;
+	eventData.update({"Title": reportname}, {$set: {"Reports": 1}}, function (err, user){
+		res.redirect('/eventBrowser');
+	});
+});
+
+router.post('/clearReport', function(req, res) {
+	var reportname = req.body.clearReport;
+	eventData.update({"Title": reportname}, {$set: {"Reports": 0}}, function (err, user){
+		res.redirect('/eventBrowser');
+	});
+});
+
 router.post('/edit', function(req, res){
 	console.log("We're chillin at edit. Post worked.")
 	var id = req.body.editevent;
@@ -278,6 +294,7 @@ router.post('/edit', function(req, res){
 	//});
 });
 
+
 router.get('/editEvent/:id', function(req, res) {
 	console.log("We are at edit event. The get function is working");
 	var identification = req.params.id;
@@ -285,6 +302,7 @@ router.get('/editEvent/:id', function(req, res) {
 		res.render('editEvent_new', {name: evt.Title, start: evt.StartTime, end: evt.EndTime, description: evt.Details, id: identification});
 	})
 })
+
 /**router.get('/editEvent/:title/:timeStart/:endTime/:details/:id', function(req, res) {
 	console.log("We are at edit event. The get function is working");
 	res.render('editEvent', { name: req.params.title, start: req.params.timeStart, end: req.params.endTime, description: req.params.details, id: req.params.id});
@@ -367,10 +385,32 @@ router.get('/allEventData', function (req, res, next) {
 	});
 });
 
+router.get('/allAccountData', function (req, res, next) {
+	userData.find({"Verified": false}, function(err, user){
+			//console.log(user);
+			res.send(/*listOf:*/ user);
+		});
+/*var accountList = userData.find({"Verified":false});
+	accountList.then(function (data) {
+		res.send(data);
+	});*/
+});
+
+router.get('/accountDetail', function (req, res, next) {
+	res.render('AccountDetails')
+});
 router.get('/eventDetail', function (req, res, next) {
 	res.render('EventDetail_front')
 });
 
+router.get('/accountDetailQuery', function (req, res, next) {
+	// search using the objectID
+	const id = monk.id(req.query['$oid']);
+	var found_id = userData.find(id);
+	found_id.then(function (data) {
+		res.send(data);
+	});
+});
 router.get('/eventDetailQuery', function (req, res, next) {
 	// search using the objectID
 	const id = monk.id(req.query['$oid']);
@@ -410,7 +450,12 @@ router.get('/updatePassword', function (req, res, next) {
 
 router.get('/account',function (req,res,next){
 	if(req.session.user){
-        res.render('OrgDetail');
+		if(req.session.user.Admin){
+			res.render('AdminOrgDetail');
+		}
+		else{
+        		res.render('OrgDetail');
+		}
     }
     else{
         res.render('requireLogin');

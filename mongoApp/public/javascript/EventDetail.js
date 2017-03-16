@@ -66,6 +66,16 @@ function eventDiv(data) {
     descriptionText = document.createElement("p");
     descriptionText.appendChild(document.createTextNode(data.Details));
     ret.appendChild(descriptionText);
+    
+    contactEmail=document.createElement("p");
+    contactEmail.className="post-subtitle";
+    contactEmail.appendChild(document.createTextNode("Email: "+data.Email));
+    ret.appendChild(contactEmail);
+
+    contactNumber=document.createElement("p");
+    contactNumber.className="post-subtitle";
+    contactNumber.appendChild(document.createTextNode("Phone: "+data.Phone));
+    ret.appendChild(contactNumber);
 
     form = document.createElement("form");
             form.setAttribute('action', "/deleteEvent");
@@ -89,6 +99,25 @@ function eventDiv(data) {
         edit.setAttribute('value', data._id);
         pin.setAttribute('formaction', "/edit");
 
+    report= document.createElement("input");
+        report.setAttribute('type',"hidden");
+	report.setAttribute('name',"reportEvent");
+	report.setAttribute('value',data.Title);
+	report.setAttribute('formaction',"/report");
+   
+    clearReport= document.createElement("input");
+        clearReport.setAttribute('type',"hidden");
+	clearReport.setAttribute('name',"clearReport");
+	clearReport.setAttribute('value',data.Title);
+	clearReport.setAttribute('formaction',"/clearReport");
+ 
+    reportButton=document.createElement("button");
+    reportButton.setAttribute('type',"submit");
+    reportButton.setAttribute('formaction',"/report");
+    reportButton.innerHTML='Report';
+    form.appendChild(report);
+    form.appendChild(reportButton);
+    
     $.get("http://localhost:3000/checkAdmin", {}, function(data) {
         if(data == "admin") {
             /**
@@ -112,6 +141,11 @@ function eventDiv(data) {
             button3.setAttribute('formaction', "/edit");
             button3.innerHTML = 'Edit Event';
 
+    	    clearButton=document.createElement("button");
+ 	    clearButton.setAttribute('type',"submit");
+	    clearButton.setAttribute('formaction',"/clearReport");
+	    clearButton.innerHTML='clear';
+
             form.appendChild(input);
             form.appendChild(button);
 
@@ -120,8 +154,29 @@ function eventDiv(data) {
 
             form.appendChild(edit);
             form.appendChild(button3);
+	    
+	    form.appendChild(clearReport);
+	    form.appendChild(clearButton);
 
         }
+    $.get("http://localhost:3000/accountId",{},function(stuff){
+	    if(data.Org==stuff){
+	    	button = document.createElement("button");
+            	button.setAttribute('type', "submit");
+            	button.innerHTML = 'Delete';
+
+	    	button3 = document.createElement("button");
+            	button3.setAttribute('type', "submit");
+           	button3.setAttribute('formaction', "/edit");
+            	button3.innerHTML = 'Edit Event';
+
+	    	form.appendChild(input);
+            	form.appendChild(button);
+	    	form.appendChild(edit);
+            	form.appendChild(button3);
+	    }
+    });
+
     });
     return form;
 }
