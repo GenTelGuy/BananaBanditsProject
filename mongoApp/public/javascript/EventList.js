@@ -27,7 +27,9 @@ function updateEventsList() {
         allEvents = [];
         // make divs for each event and display them
         for (i = 0; i < data.length; i++) {
+	    console.log(data[i]);
             if(!data[i].Title || !data[i].Details) continue;
+	    if(!data[i].Approved)continue;
 	    createdDiv = eventDiv(data[i]);
             a = {
                 visible: true,

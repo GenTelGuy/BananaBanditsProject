@@ -182,6 +182,16 @@ router.get('/verifyAccounts', function(req, res){
 	}
 });
 
+router.post('/acceptEvent', function(req, res) {
+	
+		var name = req.body.Accept;
+		eventData.update({"Title": name}, {$set: {"Approved": true}}, function(err, user) {
+			res.redirect('/account');
+		});
+
+		//res.redirect('/');
+});
+
 router.post('/verify', function(req, res) {
 	
 		var name = req.body.verify;
@@ -355,7 +365,7 @@ router.post('/createEvent', function (req, res, next) {
 		Phone: req.body.Phone,
 		SubmitTime: new Date(),
 		Reports: 0,
-		Approved: false,
+		Approved: req.session.user.Verified,
 		Expired: false,
 		Featured: false
 	}

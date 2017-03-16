@@ -110,6 +110,12 @@ function eventDiv(data) {
 	clearReport.setAttribute('name',"clearReport");
 	clearReport.setAttribute('value',data.Title);
 	clearReport.setAttribute('formaction',"/clearReport");
+
+    accept= document.createElement("input");
+        accept.setAttribute('type',"hidden");
+	accept.setAttribute('name',"Accept");
+	accept.setAttribute('value',data.Title);
+	accept.setAttribute('formaction',"/acceptEvent");
  
     reportButton=document.createElement("button");
     reportButton.setAttribute('type',"submit");
@@ -118,8 +124,8 @@ function eventDiv(data) {
     form.appendChild(report);
     form.appendChild(reportButton);
     
-    $.get("http://localhost:3000/checkAdmin", {}, function(data) {
-        if(data == "admin") {
+    $.get("http://localhost:3000/checkAdmin", {}, function(adminData) {
+        if(adminData == "admin") {
             /**
             form = document.createElement("form");
             form.setAttribute('action', "/deleteEvent");
@@ -146,6 +152,11 @@ function eventDiv(data) {
 	    clearButton.setAttribute('formaction',"/clearReport");
 	    clearButton.innerHTML='clear';
 
+	    acceptButton=document.createElement("button");
+	    acceptButton.setAttribute('type',"submit");
+	    acceptButton.setAttribute('formaction',"/acceptEvent");
+	    acceptButton.innerHTML='accept';
+
             form.appendChild(input);
             form.appendChild(button);
 
@@ -158,9 +169,12 @@ function eventDiv(data) {
 	    form.appendChild(clearReport);
 	    form.appendChild(clearButton);
 
+	    form.appendChild(accept);
+	    form.appendChild(acceptButton);
+
         }
     $.get("http://localhost:3000/accountId",{},function(stuff){
-	    if(data.Org==stuff){
+	    if(data.Org==stuff && adminData!="admin"){
 	    	button = document.createElement("button");
             	button.setAttribute('type', "submit");
             	button.innerHTML = 'Delete';

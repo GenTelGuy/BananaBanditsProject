@@ -62,7 +62,29 @@ function updateEventsList() {
         }
     });
 }
-
+function updateAcceptedList() {
+    // direct to eventDetailQuery with the objectID
+    response = $.get('http://localhost:3000/allEventData', {}, function (data) {
+        $('#notAccepted').empty();
+        allEvents = [];
+        for (i = 0; i < data.length; i++) {
+            if(!data[i].Title || !data[i].Details) continue;
+	    if(data[i].Approved) continue;
+	    createdDiv = eventDiv(data[i]);
+        
+            a = {
+                visible: true,
+                searchableText: [data[i].Title.toLowerCase(),
+                data[i].Details.toLowerCase()],
+		div: createdDiv
+            }
+            allEvents.push(a);
+            $('#notAccepted').append(createdDiv);
+            
+            
+        }
+    });
+}
 
 function accountDiv(data) {
     
@@ -202,4 +224,5 @@ function changeAccess(){
 //alert(getQueryVariable("query"));
 updateEventsList();
 updateAccountsList();
+updateAcceptedList();
 //setOrgName();
