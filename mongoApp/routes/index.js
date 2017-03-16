@@ -221,6 +221,10 @@ router.get('/deleteAll', function (req, res) {
 router.post('/deleteAccount', function(req, res){
 	var name = req.body.accountname;
 	console.log(name);
+	/*var searchID;
+	userData.find({"Org":name},function(err,user){
+	    searchID=user._id.str;
+	    eventData.remove({"Org": searchID});*/
 	userData.remove({"Org": name}, function(err, user) {
 		res.redirect('/account');
 	});
@@ -274,7 +278,7 @@ router.get('/fetchOrgName', function(req,res,next){
 router.post('/pinEvent', function(req, res) {
 	var eventname = req.body.eventpin;
 	eventData.update({"Title": eventname}, {$set: {"Featured": true}}, function (err, user){
-		res.redirect('/eventBrowser');
+		res.redirect('/');
 	});
 });
 
@@ -363,12 +367,12 @@ router.post('/createEvent', function (req, res, next) {
 	var event = {
 		Title: req.body.Title,
 		Org: OrgId,
+		OrgName: req.session.user.Org,
 		Pictures: [""],
 		Details: req.body.Description,
 		StartTime: new Date(startTime),
 		EndTime: new Date(endTime),
 		Location: req.body.Location,
-		Tags: [""],
 		Email: req.body.Email,
 		Phone: req.body.Phone,
 		SubmitTime: new Date(),
