@@ -84,7 +84,7 @@ function accountDiv(data){
 	    form.appendChild(accept);
 	    form.appendChild(acceptButton);
 	    }
-	    });
+	  });
 
     return form;
 

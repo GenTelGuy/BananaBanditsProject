@@ -73,7 +73,7 @@ function eventDiv(data) {
 
     orgConnect=document.createElement("p");
     orgConnect.className="post-subtitle";
-    orgConnect.appendChild(document.createTextNode("Organization Page"));
+    orgConnect.appendChild(document.createTextNode("Org Page"));
     orgInfo.appendChild(orgConnect);
 
     
@@ -88,8 +88,6 @@ function eventDiv(data) {
     ret.appendChild(contactNumber);
 
     form = document.createElement("form");
-    rgInfo.className="post-subtitle";i
-
             form.setAttribute('action', "/deleteEvent");
             form.setAttribute('method', "post");
             form.appendChild(ret);
