@@ -47,22 +47,16 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="index.html">Event Snap</a>
+                <a class="navbar-brand" href="/">Event Snap</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" id="list">
                     <li>
                         <a href="/eventBrowser">All Events</a>
                     </li>
-                    <li>
-                        <a href="/calendar">Calendar</a>
-                    </li>
-                    <li>
-                        <a href="post.html">College</a>
-                    </li>
-                    <li>
+                    <li id="access">
                         <a href="/login">Sign in</a>
                     </li>
                     <!--<li>
@@ -102,12 +96,12 @@
                 <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
                 <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
                 <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
-                <form name="sentMessage" id="contactForm" action="/createEvent" method="POST" novalidate>
+                <form name="sentMessage" id="contactForm" action="/createEvent" method="POST" >
 
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Event Title</label>
-                            <input type="text" class="form-control" placeholder="Event Name" id="name" name="Title" required data-validation-required-message="Please enter your name.">
+                            <input type="text" class="form-control" placeholder="Event Name" id="name" name="Title" required data-validation-required-message="Please enter your event title.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
@@ -116,7 +110,7 @@
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Event Description</label>
                             <textarea rows="5" cols="80" class="form-control" placeholder="Message" id="message" name="Description" required
-                                data-validation-required-message="Please enter a message."></textarea>
+                                data-validation-required-message="Please enter the event details."></textarea>
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
@@ -124,12 +118,12 @@
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <p>Event Start Date</p>
-                            <select id="startYear" name="StartYear">
+                            <select id="startYear" name="StartYear"required>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
                                 </select>
-                            <select id="startMonth" name="StartMonth">
+                            <select id="startMonth" name="StartMonth"required>
                                 <option value="01">January</option>
                                 <option value="02">February</option>
                                 <option value="03">March</option>
@@ -143,8 +137,8 @@
                                 <option value="11">November</option>
                                 <option value="12">December</option>
                                 </select>
-                            <select id="startDay" name="StartDay"></select>
-                            <select id="startHour" name="StartHour">
+                            <select id="startDay" name="StartDay"required></select>
+                            <select id="startHour" name="StartHour"required>
                                 <option value="00">12 AM</option>
                                 <option value="01">1 AM</option>
                                 <option value="02">2 AM</option>
@@ -170,7 +164,7 @@
                                 <option value="22">10 PM</option>
                                 <option value="23">11 PM</option>
                                 </select>
-                            <select id="startMinute" name="StartMinute">
+                            <select id="startMinute" name="StartMinute"required>
                                 <option value="00">00 minutes</option>
                                 <option value="10">10 minutes</option>
                                 <option value="20">20 minutes</option>
@@ -185,7 +179,7 @@
                     <div class="row control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <p>Event End Date</p>
-                            <select id="endYear" name="EndYear">
+                            <select id="endYear" name="EndYear"required>
                                 <option value="2017">2017</option>
                                 <option value="2018">2018</option>
                                 <option value="2019">2019</option>
@@ -302,7 +296,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
+                    <!--<ul class="list-inline text-center">
                         <li>
                             <a href="#">
                                 <span class="fa-stack fa-lg">
@@ -327,8 +321,8 @@
                                 </span>
                             </a>
                         </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                    </ul>-->
+                    <p class="copyright text-muted">Copyright &copy; Banana Bandits 2017</p>
                 </div>
             </div>
         </div>

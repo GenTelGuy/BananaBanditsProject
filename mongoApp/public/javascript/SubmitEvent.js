@@ -17,6 +17,7 @@ $(document).ready(function () {
     $('#endYear').change(function () {
         updateEndDays($('#endMonth').val(), $('#endYear').val());
     });
+    changeAccess();
 });
 
 function updateStartDays(month, year) {
@@ -40,6 +41,17 @@ function updateStartDays(month, year) {
     }
 }
 
+function changeAccess(){
+	$.get('http://localhost:3000/getSignedIn', {}, function (data){
+                        if(data=="USER"){
+				$('#access').empty();
+				console.log("Signed in");
+				$('#access').append('<a href="account">Account</a>');
+				$('#list').append('<li><a href="logout">Sign Out</a></li>');
+			}
+
+	});
+}
 function updateEndDays(month, year) {
     monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     if (year % 4 == 0 && year % 100 != 0) {

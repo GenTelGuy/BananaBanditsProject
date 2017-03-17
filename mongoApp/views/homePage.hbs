@@ -48,12 +48,9 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" id="list">
                     <li>
                         <a href="/eventBrowser">All Events</a>
-                    </li>
-                    <li>
-                        <a href="/calendar">Calendar</a>
                     </li>
 
 
@@ -93,7 +90,7 @@
 
 
 
-<li>
+<!--<li>
 <div class="dropdown">
 <a> COLLEGE</a>
   <div class="dropdown-content">
@@ -107,9 +104,10 @@
     <a href="eventSearch.html" style=" color: black;" >Off Campus</a>
   </div>
 </div>
-</li>
+</li>-->
+	<li> <a href="submitEvent">Submit Event</a> </li>
 
-	 				<li>
+	 				<li id="access">
                         <a href="login">Sign In</a>
                     </li>
                 </ul>
@@ -147,7 +145,7 @@
 
     <form>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="/javascript/EventList.js"></script>
+        <script src="/javascript/Landing.js"></script>
         </head>
                 <body>
      <input type="text" placeholder="Search" name="Search" id="searchBar">
@@ -235,7 +233,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-5 col-lg-offset-1">
-                <div class="post-preview">
+                <div class="post-preview" id="eventList">
                     <a href="post.html">
                         <h2 class="post-title">
                         	EVENT 1
@@ -251,57 +249,7 @@
                     <p class="post-meta">Posted by <a href="#">Organization</a> Date</p>
                 </div>
              	<hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                        	EVENT 2
-						</h2>
-                        <h3 class="post-subtitle">
-                        	Details <br>
-							Date <br>
-							Location <br>
-							Time <br>
-							Link to Social Media <br>
-						</h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Organization</a> Date</p></div>
-                <hr>
-
-			</div>
-
-
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                        	EVENT 3
-						</h2>
-                        <h3 class="post-subtitle">
-                        	Details <br>
-							Date <br>
-							Location <br>
-							Time <br>
-							Link to Social Media <br>
-						</h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Organization</a> Date</p></div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.html">
-                        <h2 class="post-title">
-                        	EVENT 4
-						</h2>
-                        <h3 class="post-subtitle">
-                        	Details <br>
-							Date <br>
-							Location <br>
-							Time <br>
-							Link to Social Media <br>
-						</h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Organization</a> Date</p></div>
-
-                <hr>
-
+                
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<body>
 
@@ -322,7 +270,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <ul class="list-inline text-center">
+                    <!--<ul class="list-inline text-center">
                         <li>
                             <a href="#">
                                 <span class="fa-stack fa-lg">
@@ -347,8 +295,8 @@
                                 </span>
                             </a>
                         </li>
-                    </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                    </ul>-->
+                    <p class="copyright text-muted">Copyright &copy; Banana Bandits 2017 </p>
                 </div>
             </div>
         </div>

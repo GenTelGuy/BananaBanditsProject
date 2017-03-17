@@ -30,7 +30,8 @@ router.get('/', function (req, res, next) {
 
 router.get('/login/:email', function (req, res, next) {
 	var retEmail = req.params.email;
-	res.render('loggedin', { email: retEmail });
+	res.render('homePage');
+	//res.render('loggedin', { email: retEmail });
 	console.log('retEmail');
 });
 
@@ -51,7 +52,27 @@ router.get('/createAccount', function (req, res, next) {
 	//}
 
 });
-
+function sha1(msg)
+{
+  var H0=0x67452301, H1=0xEFCDAB89, H2=0x98BADCFE, H3=0x10325476, H4=0xC3D2E1F0, M=0x0ffffffff; 
+  var i, t, W=new Array(80), ml=msg.length, wa=new Array();
+  msg += String.fromCharCode(0x80);
+  while(msg.length%4) msg+=String.fromCharCode(0);
+  for(i=0;i<msg.length;i+=4) wa.push(msg.charCodeAt(i)<<24|msg.charCodeAt(i+1)<<16|msg.charCodeAt(i+2)<<8|msg.charCodeAt(i+3));
+  while((wa.length%16)!=14) {wa.push(0);}
+  wa.push(ml>>>29),wa.push((ml<<3)&M);
+  for( var bo=0;bo<wa.length;bo+=16 ) {
+    for(i=0;i<16;i++) W[i]=wa[bo+i];
+    for(i=16;i<=79;i++) W[i]=rotl(W[i-3]^W[i-8]^W[i-14]^W[i-16],1);
+    var A=H0, B=H1, C=H2, D=H3, E=H4;
+    for(i=0 ;i<=19;i++) t=(rotl(A,5)+(B&C|~B&D)+E+W[i]+0x5A827999)&M, E=D, D=C, C=rotl(B,30), B=A, A=t;
+    for(i=20;i<=39;i++) t=(rotl(A,5)+(B^C^D)+E+W[i]+0x6ED9EBA1)&M, E=D, D=C, C=rotl(B,30), B=A, A=t;
+    for(i=40;i<=59;i++) t=(rotl(A,5)+(B&C|B&D|C&D)+E+W[i]+0x8F1BBCDC)&M, E=D, D=C, C=rotl(B,30), B=A, A=t;
+    for(i=60;i<=79;i++) t=(rotl(A,5)+(B^C^D)+E+W[i]+0xCA62C1D6)&M, E=D, D=C, C=rotl(B,30), B=A, A=t;
+    H0=H0+A&M;H1=H1+B&M;H2=H2+C&M;H3=H3+D&M;H4=H4+E&M;
+  }
+  return tohex(H0)+tohex(H1)+tohex(H2)+tohex(H3)+tohex(H4);
+};
 router.post('/createAccount/submit', function (req, res, next) {
 	var admin = req.body.admin;
 	var json;
@@ -61,6 +82,9 @@ router.post('/createAccount/submit', function (req, res, next) {
 	else {
 		json = false;
 	}
+	//if(req.body.orgPassword!=req.body.verifyPassword){
+	//	res.send("<h1> Passwords do not match</h1>");
+	//}
 	var account = {
 		Org: req.body.orgName,
 		Email: req.body.orgEmail,
@@ -69,12 +93,12 @@ router.post('/createAccount/submit', function (req, res, next) {
 		Verified: false,
 		Admin: json
 	};
+	console.log(account);
 
 	userData.insert(account);
 	res.render('accSubmit', { name: req.body.orgName });
 });
-
-router.post('/login/submit', function (req, res, next) {
+router.post('/login/submit',function(req,res,next){
 	console.log(req.session);
 	if(!req.session) { 
 		console.log("wtf");
@@ -89,7 +113,8 @@ router.post('/login/submit', function (req, res, next) {
 		}
 		else {
 			req.session.user = user;
-			res.redirect('/login/' + orgEmail);
+			res.redirect('/');
+			//res.redirect('/login/' + orgEmail);
 		}
 	});
 	//var data = userData.findOne({ $and: [{ "Email": orgEmail }, { "Password": orgPassword }] });
@@ -178,13 +203,23 @@ router.get('/verifyAccounts', function(req, res){
 	}
 });
 
+router.post('/acceptEvent', function(req, res) {
+	
+		var name = req.body.Accept;
+		eventData.update({"Title": name}, {$set: {"Approved": true}}, function(err, user) {
+			res.redirect('/account');
+		});
+
+		//res.redirect('/');
+});
+
 router.post('/verify', function(req, res) {
 	
-		var name = req.body.orgName;
+		var name = req.body.verify;
 		console.log(name);
 		userData.update({"Org": name}, {$set: {"Verified": true}}, function(err, user) {
 			console.log(user);
-			res.redirect('/verifyAccounts');
+			res.redirect('/account');
 		});
 
 		//res.redirect('/');
@@ -204,6 +239,18 @@ router.get('/deleteAll', function (req, res) {
 	});
 });
 
+router.post('/deleteAccount', function(req, res){
+	var name = req.body.accountname;
+	console.log(name);
+	/*var searchID;
+	userData.find({"Org":name},function(err,user){
+	    searchID=user._id.str;
+	    eventData.remove({"Org": searchID});*/
+	userData.remove({"Org": name}, function(err, user) {
+		res.redirect('/account');
+	});
+});
+
 router.post('/deleteEvent', function(req, res){
 	var name = req.body.eventname;
 	console.log(name);
@@ -212,6 +259,23 @@ router.post('/deleteEvent', function(req, res){
 		//console.log(user);
 		res.redirect('/eventBrowser');
 	});
+});
+
+router.get('/accountId',function(req,res,next){
+	if(!req.session.user){
+		res.send('requireLogin');
+	}
+	console.log(req.session.user._id);
+	res.send(req.session.user._id);
+});
+
+router.get('/getSignedIn',function(req,res,next){
+	if(req.session.user){
+		res.send("USER");
+	}
+	else{
+		res.send("NOT");
+	}
 });
 
 router.get('/checkAdmin', function(req, res, next){
@@ -225,9 +289,30 @@ router.get('/checkAdmin', function(req, res, next){
 	}
 });
 
+router.get('/fetchOrgName', function(req,res,next){
+	if(!req.session.user){ 
+		res.send('requireLogin');
+	}
+	res.send(req.session.user.Org);
+});
+
 router.post('/pinEvent', function(req, res) {
 	var eventname = req.body.eventpin;
 	eventData.update({"Title": eventname}, {$set: {"Featured": true}}, function (err, user){
+		res.redirect('/');
+	});
+});
+
+router.post('/report', function(req, res) {
+	var reportname = req.body.reportEvent;
+	eventData.update({"Title": reportname}, {$set: {"Reports": 1}}, function (err, user){
+		res.redirect('/eventBrowser');
+	});
+});
+
+router.post('/clearReport', function(req, res) {
+	var reportname = req.body.clearReport;
+	eventData.update({"Title": reportname}, {$set: {"Reports": 0}}, function (err, user){
 		res.redirect('/eventBrowser');
 	});
 });
@@ -252,6 +337,7 @@ router.post('/edit', function(req, res){
 	//});
 });
 
+
 router.get('/editEvent/:id', function(req, res) {
 	console.log("We are at edit event. The get function is working");
 	var identification = req.params.id;
@@ -259,6 +345,7 @@ router.get('/editEvent/:id', function(req, res) {
 		res.render('editEvent_new', {name: evt.Title, start: evt.StartTime, end: evt.EndTime, description: evt.Details, id: identification});
 	})
 })
+
 /**router.get('/editEvent/:title/:timeStart/:endTime/:details/:id', function(req, res) {
 	console.log("We are at edit event. The get function is working");
 	res.render('editEvent', { name: req.params.title, start: req.params.timeStart, end: req.params.endTime, description: req.params.details, id: req.params.id});
@@ -301,27 +388,24 @@ router.post('/createEvent', function (req, res, next) {
 	var event = {
 		Title: req.body.Title,
 		Org: OrgId,
+		OrgName: req.session.user.Org,
 		Pictures: [""],
 		Details: req.body.Description,
 		StartTime: new Date(startTime),
 		EndTime: new Date(endTime),
 		Location: req.body.Location,
-		Tags: [""],
 		Email: req.body.Email,
 		Phone: req.body.Phone,
 		SubmitTime: new Date(),
 		Reports: 0,
-		Approved: false,
+		Approved: req.session.user.Verified,
 		Expired: false,
 		Featured: false
 	}
 	var test = req.session.Email;
-	console.log(req.session.user.Email);
 	// add the event to the database
-	console.log(req.session.user)
 	eventData.insert(event);
-	console.log('saved event to database');
-	res.redirect('/submitEvent')
+	res.redirect('/account')
 });
 
 router.get('/eventBrowser', function (req, res, next) {
@@ -341,10 +425,32 @@ router.get('/allEventData', function (req, res, next) {
 	});
 });
 
+router.get('/allAccountData', function (req, res, next) {
+	userData.find({"Verified": false}, function(err, user){
+			//console.log(user);
+			res.send(/*listOf:*/ user);
+		});
+/*var accountList = userData.find({"Verified":false});
+	accountList.then(function (data) {
+		res.send(data);
+	});*/
+});
+
+router.get('/accountDetail', function (req, res, next) {
+	res.render('AccountDetails')
+});
 router.get('/eventDetail', function (req, res, next) {
 	res.render('EventDetail_front')
 });
 
+router.get('/accountDetailQuery', function (req, res, next) {
+	// search using the objectID
+	const id = monk.id(req.query['$oid']);
+	var found_id = userData.find(id);
+	found_id.then(function (data) {
+		res.send(data);
+	});
+});
 router.get('/eventDetailQuery', function (req, res, next) {
 	// search using the objectID
 	const id = monk.id(req.query['$oid']);
@@ -380,6 +486,21 @@ router.get('/reportedEvents', function (req, res, next) {
 
 router.get('/updatePassword', function (req, res, next) {
 	res.render('updatePassword')
+});
+
+router.get('/account',function (req,res,next){
+	if(req.session.user){
+		if(req.session.user.Admin){
+			res.render('AdminOrgDetail');
+		}
+		else{
+        		res.render('OrgDetail');
+		}
+    }
+    else{
+        res.render('requireLogin');
+    }
+
 });
 
 module.exports = router;

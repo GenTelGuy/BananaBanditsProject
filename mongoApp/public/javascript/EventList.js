@@ -13,6 +13,7 @@ $(document).ready(function () {
     });
 
     
+    changeAccess();
     updateEventsList();
     filterEvents();
     updateEventDivs();
@@ -26,7 +27,10 @@ function updateEventsList() {
         allEvents = [];
         // make divs for each event and display them
         for (i = 0; i < data.length; i++) {
-            createdDiv = eventDiv(data[i]);
+	    console.log(data[i]);
+            if(!data[i].Title || !data[i].Details) continue;
+	    if(!data[i].Approved)continue;
+	    createdDiv = eventDiv(data[i]);
             a = {
                 visible: true,
                 searchableText: [data[i].Title.toLowerCase(),
@@ -127,6 +131,7 @@ function eventDiv(data) {
     descriptionText.appendChild(document.createTextNode(data.Details));
     anchor.appendChild(descriptionText);
 
+    
     // make a link to take the user to the detail page for this event
     //detailLink = document.createElement("a");
     // the url contains the id of the event object
@@ -157,6 +162,18 @@ function eventDiv(data) {
     ret.appendChild(form);*/
 
     return (ret);
+}
+
+function changeAccess(){
+	$.get('http://localhost:3000/getSignedIn', {}, function (data){
+                        if(data=="USER"){
+				$('#access').empty();
+				console.log("Signed in");
+				$('#access').append('<a href="account">Account</a>');
+				$('#list').append('<li><a href="logout">Sign Out</a></li>');
+			}
+
+	});
 }
 
 // makes the date appear in a readable format

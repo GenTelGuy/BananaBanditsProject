@@ -10,7 +10,7 @@
 
   <title>Event Snap - Organization Detailsf</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="/javascript/EventDetail.js"></script>
+  <script src="/javascript/account.js"></script>
   <!-- Bootstrap Core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
 
@@ -30,10 +30,9 @@
     <!--<header class="event-pic" style="background-image: url('img/geisel.jpg')">-->
 
     <!--</header>-->
-    <h1 id="title">Organization Name</h1>
+    <div id="orgTitle" ></div>
     <hr>
         <!-- Navigation -->
- <body>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -44,17 +43,14 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="homePage.html">Events Snap</a>
+                <a class="navbar-brand" href="/">Events Snap</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" id="list">
                     <li>
                         <a href="/eventBrowser">All Events</a>
-                    </li>
-                    <li>
-                        <a href="/calendar">Calendar</a>
                     </li>
 
 
@@ -93,7 +89,7 @@
 </style>
 
 
-<li>
+<!--<li>
 <div class="dropdown">
 <a> COLLEGE</a>
   <div class="dropdown-content">
@@ -107,10 +103,11 @@
     <a href="eventSearch.html" style=" color: black;" >Off Campus</a>
   </div>
 </div>
-</li>
+</li>-->
+	<li> <a href="submitEvent">Submit Event</a> </li>
 
-	 				<li>
-                        <a href="login.html">Sign In</a>
+	 				<li id="access">
+                        <a href="login">Sign In</a>
                     </li>
                 </ul>
             </div>
@@ -155,29 +152,24 @@ span.psw {
         <div class="org_desc">
             Org Description
         </div>
-        <div class="org_details_list" id="eventList">
+	<div class="org_details_list" id="eventList">
             Event List
         </div>
     </div>
+    <button onclick = "window.location.href='reportedEvents';"type="submit" class= "btn btn-default" style="padding-left:px; display:none;">View Reported Events</button> 
     <!--<button type="submit" class="btn-btn-default">Submit Event</button>-->
     <!--<button class="submitbutton" href=#>Submit Event</button>-->
      <p style="padding-left:50px">
-     <button type="submit" class="btn btn-default" style="padding-left:px;">
-         <a href="submitEvent.html">Add Event</a></button>
      <br>
      <br>
-      <button type="submit" class="btn btn-default" style="padding-left:px;">
-         <a href="eventSearch">Event History</a></button>
-     <br>
-     <br>
+           <br>
      </p>
     <hr>
-        <center><p><a href="#" style="padding-left:30px;">Delete Account</a></p></center>
         <!-- Footer -->
     <footer>
         <div class="container">
         
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2016</p>
+                    <p class="copyright text-muted">Copyright &copy; Banana Bandits 2017 </p>
                 </div>
             </div>
         </div>
