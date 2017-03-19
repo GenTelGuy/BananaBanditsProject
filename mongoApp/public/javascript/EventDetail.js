@@ -165,10 +165,10 @@ function eventDiv(data) {
 	    acceptButton=document.createElement("button");
 	    acceptButton.setAttribute('type',"submit");
 	    acceptButton.setAttribute('formaction',"/acceptEvent");
-	    acceptButton.innerHTML='accept';
+	    acceptButton.innerHTML='Accept';
 
-            form.appendChild(input);
-            form.appendChild(button);
+//            form.appendChild(input);
+//            form.appendChild(button);
 
             form.appendChild(pin);
             form.appendChild(button2);
@@ -181,6 +181,8 @@ function eventDiv(data) {
 
 	    form.appendChild(accept);
 	    form.appendChild(acceptButton);
+            form.appendChild(input);
+            form.appendChild(button);
 
         }
     $.get("http://localhost:3000/accountId",{},function(stuff){
@@ -210,8 +212,8 @@ function changeAccess(){
                         if(data=="USER"){
 				$('#access').empty();
 				console.log("Signed in");
-				$('#access').append('<a href="account">Account</a>');
-				$('#list').append('<li><a href="logout">Sign Out</a></li>');
+				$('#access').append('<a href="/account">Account</a>');
+				$('#list').append('<li><a href="/logout">Sign Out</a></li>');
 			}
 
 	});

@@ -94,8 +94,8 @@ function changeAccess(){
 	$.get('http://localhost:3000/getSignedIn', {}, function (data){
                         if(data=="USER"){
 				$('#access').empty();
-				$('#access').append('<a href="account">Account</a>');
-				$('#list').append('<li><a href="logout">Sign Out</a></li>');
+				$('#access').append('<a href="/account">Account</a>');
+				$('#list').append('<li><a href="/logout">Sign Out</a></li>');
 			}
 
 	});

@@ -257,7 +257,7 @@ router.post('/deleteEvent', function(req, res){
 	console.log('9999999');
 	eventData.remove({"Title": name}, function(err, user) {
 		//console.log(user);
-		res.redirect('/eventBrowser');
+		res.redirect('/account');
 	});
 });
 

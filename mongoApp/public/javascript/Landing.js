@@ -28,6 +28,7 @@ function updateEventsList() {
         // make divs for each event and display them
         for (i = 0; i < data.length; i++) {
             if(!data[i].Title || !data[i].Details) continue;
+	    if(!data[i].Approved) continue;
 	    if(!data[i].Featured) continue;
 	    createdDiv = eventDiv(data[i]);
             a = {
@@ -167,8 +168,8 @@ function changeAccess(){
                         if(data=="USER"){
 				$('#access').empty();
 				console.log("Signed in");
-				$('#access').append('<a href="account">Account</a>');
-				$('#list').append('<li><a href="logout">Sign Out</a></li>');
+				$('#access').append('<a href="/account">Account</a>');
+				$('#list').append('<li><a href="/logout">Sign Out</a></li>');
 			}
 
 	});

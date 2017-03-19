@@ -164,10 +164,10 @@ span.psw {
 	<br>
 	
 	<label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="orgPassword" id="orgPassword"required>
+    <input type="password" placeholder="Enter Password" name="orgPassword" id="orgPassword" onkeyup="checkPass(); return false;"rrequired>
     <br>
 
-    <label><b> Password</b></label>
+    <label><b> Confirm Password</b></label>
     <input type="password" placeholder="Verify Password" name="verifyPassword" id="verifyPassword" onkeyup="checkPass(); return false;"required>
     <br> 
     <span id="confirmMessage"></span>

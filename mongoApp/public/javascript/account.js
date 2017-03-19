@@ -158,8 +158,8 @@ function changeAccess(){
                         if(data=="USER"){
 				$('#access').empty();
 				console.log("Signed in");
-				$('#access').append('<a href="account">Account</a>');
-				$('#list').append('<li><a href="logout">Sign Out</a></li>');
+				$('#access').append('<a href="/account">Account</a>');
+				$('#list').append('<li><a href="/logout">Sign Out</a></li>');
 			}
 
 	});
