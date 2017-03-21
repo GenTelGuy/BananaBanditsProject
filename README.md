@@ -1,4 +1,4 @@
-# BananaBanditsProject
+# EventSnap Project
 How To Install & Run
 
 Make sure that you have node.js installed. If you have not installed node.js, follow the instructions  in the links listed below:
